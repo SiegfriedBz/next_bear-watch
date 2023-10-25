@@ -1,7 +1,10 @@
+import Head from 'next/head'
 import RootLayout from '@/components/layouts/RootLayout'
 import '@/styles/globals.css'
 import { Roboto } from 'next/font/google'
-import Head from 'next/head'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
 
 const roboto = Roboto({
   weight: ['100', '300', '400', '700'],
