@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { SessionProvider } from 'next-auth/react'
 import RootLayout from '@/components/layouts/RootLayout'
 import '@/styles/globals.css'
 import { Roboto } from 'next/font/google'
@@ -13,7 +14,10 @@ const roboto = Roboto({
   display: 'swap',
 })
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
     <>
       <Head>
@@ -27,9 +31,11 @@ export default function App({ Component, pageProps }) {
         }
       `}</style>
 
-      <RootLayout>
-        <Component {...pageProps} />
-      </RootLayout>
+      <SessionProvider session={session}>
+        <RootLayout>
+          <Component {...pageProps} />
+        </RootLayout>
+      </SessionProvider>
     </>
   )
 }
