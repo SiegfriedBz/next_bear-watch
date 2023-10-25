@@ -4,11 +4,10 @@ import Logo from './Logo'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapPopup from './MapPopup'
 import { bearWasSeenWithinLastweek } from '@/utils/bearWasSeenWithinLastweek'
-import { BEAR_MARKERS } from '@/data/bearMarkers'
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
-export default function MapView() {
+export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
   const mapRef = useRef(null)
   const [mapHeight, setMapHeight] = useState(400)
   const [showPopup, setShowPopup] = useState(false)
@@ -34,13 +33,40 @@ export default function MapView() {
   }, [showPopup, popup])
 
   const handleSetPopup = (id) => {
-    const marker = BEAR_MARKERS.find((marker) => marker.id === id)
+    const marker = bearMarkers.find((marker) => marker.id === id)
     setPopup(marker)
     setShowPopup(true)
   }
 
+  const onAddBearMarker = async (e) => {
+    try {
+      const { lng: longitude, lat: latitude } = e.lngLat
+
+      const response = await fetch('/api/markers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ latitude, longitude }),
+      })
+
+      const data = await response.json()
+
+      if (response.status === 401) {
+        handleToast(data?.message)
+        return
+      }
+
+      const newBearMarker = await response.json()
+      setBearMarkers([...bearMarkers, newBearMarker])
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   return (
     <Map
+      onClick={onAddBearMarker}
       ref={mapRef}
       mapboxAccessToken={MAPBOX_TOKEN}
       initialViewState={{
@@ -67,7 +93,7 @@ export default function MapView() {
         </Popup>
       )}
 
-      {BEAR_MARKERS?.map((marker) => {
+      {bearMarkers?.map((marker) => {
         const { id, latitude, longitude, createdAt } = marker
         return (
           <div
