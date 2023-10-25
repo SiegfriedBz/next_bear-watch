@@ -49,7 +49,7 @@ export default function MapView() {
         zoom: 6,
       }}
       style={{ width: 'auto', height: mapHeight }}
-      mapStyle='mapbox://styles/mapbox/streets-v9'
+      mapStyle='mapbox://styles/mapbox/outdoors-v12'
     >
       {showPopup && (
         <Popup
