@@ -3,7 +3,6 @@ import MapView from '@/components/MapView'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
 import { prisma } from '../../server/db/prismaClient'
-
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
