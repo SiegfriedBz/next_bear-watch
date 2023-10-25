@@ -12,6 +12,10 @@ export default async function handle(req, res) {
     return
   }
 
+  const prismaUser = await prisma.user.findUnique({
+    where: { email: session.user.email },
+  })
+
   const { method } = req
 
   switch (method) {
@@ -20,8 +24,14 @@ export default async function handle(req, res) {
         const marker = await prisma.marker.create({
           data: {
             ...req.body,
+            user: {
+              connect: {
+                id: prismaUser.id,
+              },
+            },
           },
         })
+
         res.status(201).json(marker)
       } catch (error) {
         res.status(500).json({ error })

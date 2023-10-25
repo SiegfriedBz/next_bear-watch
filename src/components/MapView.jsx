@@ -57,8 +57,7 @@ export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
         return
       }
 
-      const newBearMarker = await response.json()
-      setBearMarkers([...bearMarkers, newBearMarker])
+      setBearMarkers([...bearMarkers, data])
     } catch (e) {
       console.error(e)
     }
