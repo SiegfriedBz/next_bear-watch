@@ -1,53 +1,56 @@
-import { useSession, signIn, signOut } from 'next-auth/react'
-import Logo from './Logo'
-import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
 import Link from 'next/link'
+import Logo from './Logo'
+import NavLinks from './NavLinks'
+import ButtonToggleTheme from './ButtonToggleTheme'
+import ButtonMobileBurger from './ButtonMobileBurger'
+import Modal from './Modal'
 
 const Navbar = () => {
-  const { data: session, status } = useSession()
-  const userName = session?.user?.name
-  const userImage = session?.user?.image
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+  }
 
   return (
-    <div className='relative flex items-center justify-between px-2 py-4'>
-      <Logo />
-      {!userName && <h1 className='text-2xl font-bold italic'>Bear Watch</h1>}
-      <div>
-        {status === 'loading' ? (
-          <h1> loading... please wait</h1>
-        ) : status === 'authenticated' ? (
-          <div className='flex items-center space-x-4'>
-            <h1 className=''>Hi {userName?.split(' ')?.[0] || userName}!</h1>
-            <Link href='/profile'>Profile</Link>
-            <Image
-              src={userImage}
-              alt={userImage + ' photo'}
-              width={35}
-              height={35}
-              className='rounded-full'
-            />
-            <button onClick={() => signOut({ callbackUrl: '/' })}>
-              <FontAwesomeIcon icon={faArrowRightFromBracket} />
-            </button>
-          </div>
-        ) : (
-          <div
-            className='flex cursor-pointer space-x-4'
-            onClick={() => signIn('google', { callbackUrl: '/' })}
-          >
-            <Image
-              src='/google_g_icon.png'
-              alt={userImage + ' photo'}
-              width={35}
-              height={35}
-              className='rounded-full'
-            />
-          </div>
-        )}
+    <header
+      id='header'
+      className='layout-gradient fixed left-0 right-0 top-0 z-[999] border-b px-2 py-4'
+    >
+      <div className='flex h-full items-center justify-between'>
+        <div className='flex items-center space-x-2'>
+          <Logo />
+          <Link id='brand-link' href='/' target='_self'>
+            <span className='whitespace-nowrap text-xl font-bold italic'>
+              Bear Watch
+            </span>
+          </Link>
+        </div>
+
+        <div className='flex items-center justify-end space-x-4'>
+          <ButtonToggleTheme />
+
+          <ButtonMobileBurger
+            modalIsOpen={modalIsOpen}
+            setModalIsOpen={setModalIsOpen}
+          />
+        </div>
       </div>
-    </div>
+
+      {/* backdrop & menu */}
+      {modalIsOpen && (
+        <Modal
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+          className={modalIsOpen ? 'z-[999]' : 'z-0'}
+        >
+          <div className='w-full py-1'>
+            <NavLinks modal={true} closeModal={closeModal} />
+          </div>
+        </Modal>
+      )}
+    </header>
   )
 }
 
