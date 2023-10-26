@@ -1,18 +1,5 @@
-import { ToastProvider } from '@/context/toastContext'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-
 const PageLayout = ({ children }) => {
-  return (
-    <ToastProvider>
-      <main className='container mx-auto'>
-        <>
-          {children}
-          <ToastContainer />
-        </>
-      </main>
-    </ToastProvider>
-  )
+  return <div className='page-layout layout-gradient'>{children}</div>
 }
 
 export default PageLayout
