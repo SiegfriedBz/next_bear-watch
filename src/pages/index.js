@@ -1,20 +1,38 @@
 import { useState } from 'react'
-import MapView from '@/components/MapView'
+import { useAppContext } from '@/context/appContext'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
 import { prisma } from '../../server/db/prismaClient'
-import ButtonHelp from '@/components/ButtonHelp'
+import HomePageLayout from '@/components/layouts/HomePageLayout'
+import Hero from '@/components/Hero'
+import Features from '@/components/Features'
+import MapView from '@/components/MapView'
 
 export default function Home(props) {
-  const [user, setUser] = useState(props.user)
   const [bearMarkers, setBearMarkers] = useState(props.bearMarkers)
+  const user = props?.user
+  const { setUser } = useAppContext()
+
+  if (user) {
+    setUser(user)
+  }
 
   return (
-    <main>
-      <ButtonHelp user={user} />
+    <HomePageLayout>
+      <section id='hero'>
+        <Hero />
+      </section>
 
-      <MapView bearMarkers={bearMarkers} setBearMarkers={setBearMarkers} />
-    </main>
+      <section id='sub-hero'>
+        <section id='features' className='my-8 scroll-mt-24 px-4'>
+          <Features />
+        </section>
+
+        <div id='map' className='px-2'>
+          <MapView bearMarkers={bearMarkers} setBearMarkers={setBearMarkers} />
+        </div>
+      </section>
+    </HomePageLayout>
   )
 }
 
@@ -35,15 +53,15 @@ export async function getServerSideProps(context) {
     where: {
       email: session.user.email,
     },
-    include: {
-      markers: true,
-    },
+    // include: {
+    //   markers: true,
+    // },
   })
 
   return {
     props: {
       session,
-      user: JSON.parse(JSON.stringify(user)),
+      user,
       bearMarkers: JSON.parse(JSON.stringify(bearMarkers)),
     },
   }
