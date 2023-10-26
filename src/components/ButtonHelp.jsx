@@ -1,9 +1,11 @@
+import { useToastContext } from '@/context/toastContext'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-const ButtonHelp = ({ user, handleToast }) => {
+const ButtonHelp = ({ user }) => {
   const router = useRouter()
+  const { handleToast } = useToastContext()
   const [helpLink, setHelpLink] = useState(null)
   const bloodGroup = user?.bloodGroup
   const friendWhatsapp = user?.friendWhatsappNumber
@@ -28,7 +30,10 @@ const ButtonHelp = ({ user, handleToast }) => {
 
       setHelpLink(`https://wa.me/${friendWhatsapp}?text=${encodedString}`)
     } catch (error) {
-      handleToast(`${error.message}, 'Please allow location access'`)
+      handleToast({
+        type: 'error',
+        message: `${error.message}, 'Please allow location access'`,
+      })
       console.log(error)
     }
   }

@@ -4,10 +4,12 @@ import Logo from './Logo'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapPopup from './MapPopup'
 import { bearWasSeenWithinLastweek } from '@/utils/bearWasSeenWithinLastweek'
+import { useToastContext } from '@/context/toastContext'
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
-export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
+export default function MapView({ bearMarkers, setBearMarkers }) {
+  const { handleToast } = useToastContext()
   const mapRef = useRef(null)
   const [mapHeight, setMapHeight] = useState(500)
   const [showPopup, setShowPopup] = useState(false)
@@ -53,7 +55,10 @@ export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
       const data = await response.json()
 
       if (response.status === 401) {
-        handleToast(data?.message)
+        handleToast({
+          type: 'warn',
+          message: data?.message,
+        })
         return
       }
 

@@ -3,29 +3,17 @@ import MapView from '@/components/MapView'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
 import { prisma } from '../../server/db/prismaClient'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import ButtonHelp from '@/components/ButtonHelp'
 
 export default function Home(props) {
   const [user, setUser] = useState(props.user)
   const [bearMarkers, setBearMarkers] = useState(props.bearMarkers)
 
-  const handleToast = (message) => {
-    toast.warn(message)
-  }
-
   return (
-    <main className=''>
-      <ToastContainer />
+    <main>
+      <ButtonHelp user={user} />
 
-      <ButtonHelp user={user} handleToast={handleToast} />
-
-      <MapView
-        bearMarkers={bearMarkers}
-        setBearMarkers={setBearMarkers}
-        handleToast={handleToast}
-      />
+      <MapView bearMarkers={bearMarkers} setBearMarkers={setBearMarkers} />
     </main>
   )
 }
