@@ -1,11 +1,12 @@
 import Navbar from '../Navbar'
 import Footer from '../Footer'
+import PageLayout from './PageLayout'
 
 const RootLayout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main className='container mx-auto'>{children}</main>
+      <PageLayout>{children}</PageLayout>
       <Footer />
     </>
   )
