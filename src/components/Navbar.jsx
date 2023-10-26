@@ -3,6 +3,7 @@ import Logo from './Logo'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import Link from 'next/link'
 
 const Navbar = () => {
   const { data: session, status } = useSession()
@@ -18,14 +19,13 @@ const Navbar = () => {
           <h1> loading... please wait</h1>
         ) : status === 'authenticated' ? (
           <div className='flex items-center space-x-4'>
-            <h1 className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-              Hi {userName}
-            </h1>
+            <h1 className=''>Hi {userName?.split(' ')?.[0] || userName}!</h1>
+            <Link href='/profile'>Profile</Link>
             <Image
               src={userImage}
               alt={userImage + ' photo'}
-              width={50}
-              height={50}
+              width={35}
+              height={35}
               className='rounded-full'
             />
             <button onClick={() => signOut({ callbackUrl: '/' })}>
@@ -40,8 +40,8 @@ const Navbar = () => {
             <Image
               src='/google_g_icon.png'
               alt={userImage + ' photo'}
-              width={50}
-              height={50}
+              width={35}
+              height={35}
               className='rounded-full'
             />
           </div>
