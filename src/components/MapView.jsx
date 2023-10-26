@@ -4,12 +4,12 @@ import Logo from './Logo'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapPopup from './MapPopup'
 import { bearWasSeenWithinLastweek } from '@/utils/bearWasSeenWithinLastweek'
-import { useToastContext } from '@/context/toastContext'
+import { useAppContext } from '@/context/appContext'
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
 export default function MapView({ bearMarkers, setBearMarkers }) {
-  const { handleToast } = useToastContext()
+  const { handleToast } = useAppContext()
   const mapRef = useRef(null)
   const [mapHeight, setMapHeight] = useState(500)
   const [showPopup, setShowPopup] = useState(false)
@@ -111,8 +111,8 @@ export default function MapView({ bearMarkers, setBearMarkers }) {
               <Logo
                 className={
                   bearWasSeenWithinLastweek(createdAt)
-                    ? 'ring-warning bg-warning-light h-10 w-10 rounded-full ring-2'
-                    : 'ring-success h-8 w-8 ring-1'
+                    ? 'h-10 w-10 rounded-full bg-warning-light ring-2 ring-warning'
+                    : 'h-8 w-8 ring-1 ring-success'
                 }
               />
             </Marker>
