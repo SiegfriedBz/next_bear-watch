@@ -5,6 +5,7 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -13,7 +14,7 @@ module.exports = {
           dark: '#2563EB', // blue-600
           light: '#93C5FD', // blue-300
         },
-        success: '#22c55e', // green-500
+        success: '#94D177',
         warning: {
           DEFAULT: '#EF4444', // red-500
           dark: '#DC2626', // red-600
