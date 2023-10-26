@@ -8,7 +8,7 @@ const Logo = ({ className = '' }) => {
       href='/'
       target='_self'
       className={twMerge(
-        'flex h-14 w-14 items-center justify-center rounded-full bg-white ring-2 ring-slate-900',
+        'flex h-11 w-11 items-center justify-center rounded-full bg-white ring-2 ring-slate-900',
         className
       )}
     >
