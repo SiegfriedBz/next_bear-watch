@@ -18,7 +18,7 @@ export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
     if (window == undefined) return
 
     const width = window.innerWidth
-    setMapHeight(width > 768 ? 800 : 400)
+    setMapHeight(width > 768 ? 800 : 500)
   }, [])
 
   useEffect(() => {
