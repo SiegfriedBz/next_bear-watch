@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { faNotesMedical } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
-import { useToastContext } from '@/context/toastContext'
+import { useAppContext } from '@/context/appContext'
+import PageLayout from '@/components/layouts/PageLayout'
 
 const BLOOD_GROUPS = [
   'O_POSITIVE',
@@ -26,7 +27,7 @@ const Profile = (props) => {
   )
   const [bloodGroup, setBloodGroup] = useState(user.bloodGroup)
   const router = useRouter()
-  const { handleToast } = useToastContext()
+  const { handleToast } = useAppContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -54,50 +55,50 @@ const Profile = (props) => {
   }
 
   return (
-    <>
-      <div className='flex flex-col items-center justify-center'>
+    <PageLayout>
+      <div className='layout-gradient flex flex-col items-center justify-center pb-20'>
         <h2 className='text-3xl'>My Profile</h2>
 
         <form
           onSubmit={handleSubmit}
-          className='mt-8 flex flex-col items-center justify-center space-y-8'
+          className='mt-8 flex flex-col items-center justify-center space-y-12'
         >
           <div className='flex flex-col items-center justify-center'>
             <label
               htmlFor='friendWhatsappNumber'
-              className='mb-1 flex items-center space-x-1'
+              className='mb-4 flex items-center space-x-2'
             >
               <FontAwesomeIcon
                 icon={faWhatsapp}
                 className='text-2xl text-teal-700 dark:text-teal-500'
               />
-              <span className='font-lightbold'>My Friend&apos;s Whatsapp</span>
+              <h3 className='font-lightbold'>My Friend&apos;s Whatsapp</h3>
             </label>
             <input
               type='text'
               id='friendWhatsappNumber'
               value={friendWhatsappNumber || ''}
               onChange={(e) => setFriendWhatsappNumber(e.target.value)}
-              className='w-full rounded-md border-2 border-gray-300 px-2 py-2 text-center outline-none '
+              className='w-full rounded-md border-2 border-gray-300 px-2 py-2 text-center outline-none dark:text-slate-900 '
             />
           </div>
 
           <div className='flex w-full flex-col items-center justify-center'>
             <label
               htmlFor='bloodGroup'
-              className='mb-1 flex items-center space-x-1'
+              className='mb-4 flex items-center space-x-2'
             >
               <FontAwesomeIcon
                 icon={faNotesMedical}
-                className='text-primary dark:text-primary-light text-2xl'
+                className='text-2xl text-primary dark:text-primary-light'
               />
-              <span className='font-lightbold'>My Blood Group</span>
+              <h3 className='font-lightbold'>My Blood Group</h3>
             </label>
             <select
               id='bloodGroup'
               value={bloodGroup || BLOOD_GROUPS[0]}
               onChange={(e) => setBloodGroup(e.target.value)}
-              className='w-full rounded-md border-2 border-gray-300 px-2 py-2 text-center outline-none '
+              className='w-full rounded-md border-2 border-gray-300 px-2 py-2 text-center outline-none dark:text-slate-900'
             >
               {BLOOD_GROUPS.map((bloodGroup) => {
                 return (
@@ -110,14 +111,14 @@ const Profile = (props) => {
           </div>
 
           <button
-            className='bg-primary w-1/2 rounded-md px-4 py-2 text-white'
+            className='w-full rounded-md bg-primary px-4 py-2 text-white'
             type='submit'
           >
             Save
           </button>
         </form>
       </div>
-    </>
+    </PageLayout>
   )
 }
 
