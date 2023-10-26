@@ -1,5 +1,5 @@
 import { useSession, signIn, signOut } from 'next-auth/react'
-import Logo from './Logo'
+import { LogoLink } from './Logo'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <div className='relative flex items-center justify-between px-2 py-4'>
-      <Logo />
+      <LogoLink />
       {!userName && <h1 className='text-2xl font-bold italic'>Bear Watch</h1>}
       <div>
         {status === 'loading' ? (

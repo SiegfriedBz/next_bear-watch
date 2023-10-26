@@ -2,17 +2,15 @@ import { GithubIconLink, LinkedinIconLink } from './Icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import Logo from './Logo'
+import { LogoLink } from './Logo'
 
 const Footer = () => {
   return (
     <footer id='footer' className='layout-gradient border-t px-2 py-4'>
       <div id='footer-top' className='flex items-center justify-between'>
-        {/* contact */}
-
+        {/* brand */}
         <div id='footer-brand' className='flex items-center space-x-2'>
-          <Logo className='h-9 w-9' />
-
+          <LogoLink className='h-9 w-9' />
           <Link id='brand-link' href='/' target='_self'>
             <span className='whitespace-nowrap text-lg font-bold italic'>
               Bear Watch

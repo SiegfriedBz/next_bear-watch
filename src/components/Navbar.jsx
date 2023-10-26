@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import Logo from './Logo'
+import { LogoLink } from './Logo'
 import NavLinks from './NavLinks'
 import ButtonToggleTheme from './ButtonToggleTheme'
 import ButtonMobileBurger from './ButtonMobileBurger'
@@ -20,7 +20,7 @@ const Navbar = () => {
     >
       <div className='flex h-full items-center justify-between'>
         <div className='flex items-center space-x-2'>
-          <Logo />
+          <LogoLink />
           <Link id='brand-link' href='/' target='_self'>
             <span className='whitespace-nowrap text-xl font-bold italic'>
               Bear Watch

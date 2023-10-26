@@ -2,13 +2,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
 
-const Logo = ({ className = '' }) => {
+export const LogoLink = ({ className = '' }) => {
   return (
-    <Link
-      href='/'
-      target='_self'
+    <Link href='/' target='_self'>
+      <Logo className={className} />
+    </Link>
+  )
+}
+
+export const Logo = ({ className = '' }) => {
+  return (
+    <span
       className={twMerge(
-        'flex h-11 w-11 items-center justify-center rounded-full bg-white ring-2 ring-slate-900',
+        'inline-flex h-11 w-11 items-center justify-center rounded-full bg-white ring-2 ring-slate-900',
         className
       )}
     >
@@ -19,8 +25,6 @@ const Logo = ({ className = '' }) => {
         height={50}
         priority
       />
-    </Link>
+    </span>
   )
 }
-
-export default Logo
