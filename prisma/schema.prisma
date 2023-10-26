@@ -10,15 +10,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum BloodGroup {
+  A_POSITIVE
+  A_NEGATIVE
+  B_POSITIVE
+  B_NEGATIVE
+  O_POSITIVE
+  O_NEGATIVE
+  AB_POSITIVE
+  AB_NEGATIVE
+}
+
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  markers       Marker[]
+  id                   String      @id @default(cuid())
+  name                 String?
+  email                String      @unique
+  emailVerified        DateTime?
+  image                String?
+  bloodGroup           BloodGroup?
+  friendWhatsappNumber String?
+  accounts             Account[]
+  sessions             Session[]
+  markers              Marker[]
 }
 
 model Marker {
@@ -32,18 +45,18 @@ model Marker {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -57,7 +70,6 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
 
 model VerificationToken {
   identifier String

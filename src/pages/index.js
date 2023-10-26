@@ -5,8 +5,10 @@ import { getServerSession } from 'next-auth'
 import { prisma } from '../../server/db/prismaClient'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import ButtonHelp from '@/components/ButtonHelp'
 
 export default function Home(props) {
+  const [user, setUser] = useState(props.user)
   const [bearMarkers, setBearMarkers] = useState(props.bearMarkers)
 
   const handleToast = (message) => {
@@ -16,6 +18,9 @@ export default function Home(props) {
   return (
     <main className=''>
       <ToastContainer />
+
+      <ButtonHelp user={user} handleToast={handleToast} />
+
       <MapView
         bearMarkers={bearMarkers}
         setBearMarkers={setBearMarkers}
@@ -26,14 +31,32 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions)
+
   const bearMarkers = await prisma.marker.findMany()
 
-  const session = await getServerSession(context.req, context.res, authOptions)
+  if (!session) {
+    return {
+      props: {
+        bearMarkers: JSON.parse(JSON.stringify(bearMarkers)),
+      },
+    }
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+    include: {
+      markers: true,
+    },
+  })
 
   return {
     props: {
-      bearMarkers: JSON.parse(JSON.stringify(bearMarkers)),
       session,
+      user: JSON.parse(JSON.stringify(user)),
+      bearMarkers: JSON.parse(JSON.stringify(bearMarkers)),
     },
   }
 }

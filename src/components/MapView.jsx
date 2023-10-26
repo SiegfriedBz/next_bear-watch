@@ -9,7 +9,7 @@ const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
 export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
   const mapRef = useRef(null)
-  const [mapHeight, setMapHeight] = useState(400)
+  const [mapHeight, setMapHeight] = useState(500)
   const [showPopup, setShowPopup] = useState(false)
   const [popup, setPopup] = useState(null)
 
@@ -18,7 +18,7 @@ export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
     if (window == undefined) return
 
     const width = window.innerWidth
-    setMapHeight(width > 768 ? 800 : 400)
+    setMapHeight(width > 768 ? 800 : 500)
   }, [])
 
   useEffect(() => {
@@ -106,8 +106,8 @@ export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
               <Logo
                 className={
                   bearWasSeenWithinLastweek(createdAt)
-                    ? 'h-10 w-10 rounded-full bg-red-200 ring-2 ring-red-500'
-                    : 'h-8 w-8 ring-1 ring-green-500'
+                    ? 'ring-warning bg-warning-light h-10 w-10 rounded-full ring-2'
+                    : 'ring-success h-8 w-8 ring-1'
                 }
               />
             </Marker>
