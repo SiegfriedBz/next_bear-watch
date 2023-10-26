@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
-import Logo from './Logo'
+import { Logo } from './Logo'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapPopup from './MapPopup'
 import { bearWasSeenWithinLastweek } from '@/utils/bearWasSeenWithinLastweek'
@@ -8,7 +8,7 @@ import { useAppContext } from '@/context/appContext'
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
-export default function MapView({ bearMarkers, setBearMarkers }) {
+export default function MapView({ isEditMode, bearMarkers, setBearMarkers }) {
   const { handleToast } = useAppContext()
   const mapRef = useRef(null)
   const [mapHeight, setMapHeight] = useState(500)
@@ -41,6 +41,8 @@ export default function MapView({ bearMarkers, setBearMarkers }) {
   }
 
   const onAddBearMarker = async (e) => {
+    if (!isEditMode) return
+
     try {
       const { lng: longitude, lat: latitude } = e.lngLat
 

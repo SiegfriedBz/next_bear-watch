@@ -12,6 +12,7 @@ export default function Home(props) {
   const [bearMarkers, setBearMarkers] = useState(props.bearMarkers)
   const user = props?.user
   const { setUser } = useAppContext()
+  const [isEditMode, setIsEditMode] = useState(false)
 
   if (user) {
     setUser(user)
@@ -29,7 +30,24 @@ export default function Home(props) {
         </section>
 
         <div id='map' className='px-2'>
-          <MapView bearMarkers={bearMarkers} setBearMarkers={setBearMarkers} />
+          <label
+            htmlFor='edit-mode'
+            className='my-2 flex items-center space-x-2'
+          >
+            <input
+              id='edit-mode'
+              value={isEditMode}
+              onChange={() => setIsEditMode((prev) => !prev)}
+              type='checkbox'
+              className='me-2 h-6 w-6 accent-success'
+            />
+            Map Edit mode
+          </label>
+          <MapView
+            isEditMode={isEditMode}
+            bearMarkers={bearMarkers}
+            setBearMarkers={setBearMarkers}
+          />
         </div>
       </section>
     </HomePageLayout>
