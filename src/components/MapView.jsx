@@ -106,8 +106,8 @@ export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
               <Logo
                 className={
                   bearWasSeenWithinLastweek(createdAt)
-                    ? 'h-10 w-10 rounded-full bg-red-200 ring-2 ring-red-500'
-                    : 'h-8 w-8 ring-1 ring-green-500'
+                    ? 'ring-warning bg-warning-light h-10 w-10 rounded-full ring-2'
+                    : 'ring-success h-8 w-8 ring-1'
                 }
               />
             </Marker>

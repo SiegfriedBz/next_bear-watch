@@ -53,7 +53,7 @@ const ButtonHelp = ({ user, handleToast }) => {
     <div className='flex justify-center'>
       {!helpLink ? (
         <button
-          className='my-4 rounded-xl bg-white px-4 py-2 text-3xl text-red-500 ring-2 ring-red-500 transition-all duration-300 hover:bg-red-500 hover:text-white'
+          className='text-warning ring-warning hover:bg-warning my-4 rounded-xl bg-white px-4 py-2 text-3xl ring-2 transition-all duration-300 hover:text-white'
           onClick={handleHelp}
         >
           Get Help
@@ -61,7 +61,7 @@ const ButtonHelp = ({ user, handleToast }) => {
       ) : (
         <Link
           href={helpLink}
-          className='my-4 rounded-xl bg-white px-4 py-2 text-3xl text-red-500 ring-2 ring-red-500 transition-all duration-300 hover:bg-red-500 hover:text-white'
+          className='text-warning ring-warning hover:bg-warning my-4 rounded-xl bg-white px-4 py-2 text-3xl ring-2 transition-all duration-300 hover:text-white'
         >
           Confirm
         </Link>
