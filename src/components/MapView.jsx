@@ -9,7 +9,7 @@ const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 
 export default function MapView({ bearMarkers, setBearMarkers, handleToast }) {
   const mapRef = useRef(null)
-  const [mapHeight, setMapHeight] = useState(400)
+  const [mapHeight, setMapHeight] = useState(500)
   const [showPopup, setShowPopup] = useState(false)
   const [popup, setPopup] = useState(null)
 
