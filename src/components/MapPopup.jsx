@@ -8,7 +8,7 @@ const MapPopup = ({ popup }) => {
       <Logo
         className={
           bearWasSeenWithinLastweek(popup?.createdAt)
-            ? 'h-12 w-12 rounded-full bg-warning-light ring-2 ring-warning '
+            ? 'h-12 w-12 rounded-full bg-warning-light/50 ring-2 ring-warning '
             : 'h-10 w-10 ring-2 ring-success'
         }
       />
