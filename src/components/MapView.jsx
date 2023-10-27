@@ -1,18 +1,74 @@
 import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { useAppContext } from '@/context/appContext'
 import Map, { Marker, Popup } from 'react-map-gl'
 import { Logo } from './Logo'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapPopup from './MapPopup'
 import { bearWasSeenWithinLastweek } from '@/utils/bearWasSeenWithinLastweek'
-import { useAppContext } from '@/context/appContext'
+import { getUserLocation } from '@/utils/getUserLocation'
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
+const INIT_LATITUDE = 48.43
+const INIT_LONGITUDE = -71.07
 
-export default function MapView({ isEditMode, bearMarkers, setBearMarkers }) {
-  const { handleToast } = useAppContext()
+export default function MapView({
+  isFilteredMap,
+  isCenteredMap,
+  isMapEditMode,
+  bearMarkers,
+  setBearMarkers,
+}) {
+  const { user, handleToast } = useAppContext()
   const mapRef = useRef(null)
+  const [latitude, setLatitude] = useState(INIT_LATITUDE)
+  const [longitude, setLongitude] = useState(INIT_LONGITUDE)
   const [showPopup, setShowPopup] = useState(false)
   const [popup, setPopup] = useState(null)
+  const [filteredBearMarkers, setFilteredBearMarkers] = useState(null)
+
+  useEffect(() => {
+    if (isFilteredMap) {
+      // display only last week's bear sightings
+      const filteredMarkers = bearMarkers?.filter((marker) => {
+        return bearWasSeenWithinLastweek(marker.createdAt)
+      })
+
+      setFilteredBearMarkers(filteredMarkers)
+    } else {
+      setFilteredBearMarkers(bearMarkers)
+    }
+  }, [isFilteredMap, bearMarkers])
+
+  // center map on user location
+  useEffect(() => {
+    if (!isCenteredMap) {
+      setLatitude(INIT_LATITUDE)
+      setLongitude(INIT_LONGITUDE)
+
+      if (mapRef?.current != null) {
+        mapRef?.current?.flyTo({
+          center: [INIT_LONGITUDE, INIT_LATITUDE],
+          duration: 5000,
+          zoom: 11,
+        })
+      }
+      return
+    }
+
+    ;(async () => {
+      const { latitude, longitude } = await getUserLocation()
+      setLatitude(latitude)
+      setLongitude(longitude)
+
+      if (mapRef?.current != null) {
+        mapRef?.current?.flyTo({
+          center: [longitude, latitude],
+          duration: 5000,
+          zoom: 11,
+        })
+      }
+    })()
+  }, [isCenteredMap])
 
   useEffect(() => {
     if (mapRef?.current == null || !showPopup) return
@@ -31,8 +87,9 @@ export default function MapView({ isEditMode, bearMarkers, setBearMarkers }) {
     setShowPopup(true)
   }
 
+  // add bear marker to db if user signed in and map is in edit mode
   const onAddBearMarker = async (e) => {
-    if (!isEditMode) return
+    if (!user || !isMapEditMode) return
 
     try {
       const { lng: longitude, lat: latitude } = e.lngLat
@@ -67,8 +124,8 @@ export default function MapView({ isEditMode, bearMarkers, setBearMarkers }) {
       ref={mapRef}
       mapboxAccessToken={MAPBOX_TOKEN}
       initialViewState={{
-        latitude: 48.43,
-        longitude: -71.07,
+        latitude: latitude,
+        longitude: longitude,
         zoom: 6,
       }}
       style={{ width: 'auto', height: 475 }}
@@ -90,7 +147,7 @@ export default function MapView({ isEditMode, bearMarkers, setBearMarkers }) {
         </Popup>
       )}
 
-      {bearMarkers?.map((marker) => {
+      {filteredBearMarkers?.map((marker) => {
         const { id, latitude, longitude, createdAt } = marker
         return (
           <div
@@ -104,7 +161,7 @@ export default function MapView({ isEditMode, bearMarkers, setBearMarkers }) {
               <Logo
                 className={
                   bearWasSeenWithinLastweek(createdAt)
-                    ? 'h-10 w-10 rounded-full bg-warning-light ring-2 ring-warning'
+                    ? 'h-10 w-10 rounded-full bg-warning-light/50 ring-2 ring-warning'
                     : 'h-8 w-8 ring-1 ring-success'
                 }
               />
