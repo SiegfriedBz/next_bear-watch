@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 import { SessionProvider } from 'next-auth/react'
 import RootLayout from '@/components/layouts/RootLayout'
 import '@/styles/globals.css'
@@ -34,6 +35,18 @@ export default function App({
       <SessionProvider session={session}>
         <RootLayout>
           <Component {...pageProps} />
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=G-L692E7HF9N`}
+          />
+          <Script id='google-analytics'>
+            {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-L692E7HF9N');
+        `}
+          </Script>
         </RootLayout>
       </SessionProvider>
     </>
