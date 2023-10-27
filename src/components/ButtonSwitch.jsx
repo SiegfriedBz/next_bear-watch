@@ -8,7 +8,6 @@ const ButtonSwitch = ({ isEditMode, setIsEditMode }) => {
       <label
         htmlFor={`switch-${switchId}}`}
         className={`
-
               relative
               h-full
               w-full
@@ -34,7 +33,7 @@ const ButtonSwitch = ({ isEditMode, setIsEditMode }) => {
               after:w-[max-content] 
               after:-translate-y-1/2 
               after:translate-x-1/2
-              after:content-["Add_bear_marker"]
+              after:content-["Map_edit_mode"]
               
               dark:before:border-stone-100/80
               ${
