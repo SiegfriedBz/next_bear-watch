@@ -1,20 +1,26 @@
+import { useAppContext } from '@/context/appContext'
+import { AnimatePresence, motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHelicopter } from '@fortawesome/free-solid-svg-icons'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
 import ButtonHelp from './ButtonHelp'
 
 const Helicopter = () => {
-  const [helpIsOpened, setHelpIsOpened] = useState(false)
+  const { helpIsOpened, setHelpIsOpened } = useAppContext()
 
   return (
     <div
       id='help'
-      className='fixed right-2 top-24 z-[99999] flex h-10 w-10 items-center justify-center rounded-full bg-stone-100 p-2 ring-1 ring-warning'
+      className={`fixed right-2 top-[5.6rem] z-[99999] flex h-10 w-10 items-center justify-center rounded-full p-2 transition duration-500 ease-in-out  ${
+        helpIsOpened
+          ? 'bg-transparent ring-0'
+          : 'bg-stone-100 ring-1 ring-warning'
+      }`}
     >
       <FontAwesomeIcon
         icon={faHelicopter}
-        className='text-2xl font-extrabold text-warning'
+        className={`text-2xl font-extrabold text-warning ${
+          helpIsOpened ? 'opacity-0' : 'opacity-100'
+        }`}
         onClick={() => setHelpIsOpened(true)}
       />
       <AnimatePresence>
