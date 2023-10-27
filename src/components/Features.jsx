@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useSession, signIn } from 'next-auth/react'
 import { useAppContext } from '@/context/appContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faHelicopter } from '@fortawesome/free-solid-svg-icons'
@@ -8,10 +9,11 @@ import { Logo } from './Logo'
 const Features = () => {
   const router = useRouter()
   const { setHelpIsOpened } = useAppContext()
+  const { data: session, status } = useSession()
 
   return (
     <>
-      <h2 className='font-bold'>Explore Bear Watch&apos;s Key Features</h2>
+      <h2 className='text-center font-bold'>Bear Watch&apos;s Key Features</h2>
       <p>
         Bear Watch is your ultimate companion for outdoor adventures. Whether
         you&apos;re an enthusiastic hiker, seasoned camper, or a nature lover,
@@ -23,7 +25,10 @@ const Features = () => {
           onClick={() => router.push('/#map')}
           className='flex items-center space-x-2 font-bold'
         >
-          <FontAwesomeIcon icon={faEye} className='text-xl' />
+          <FontAwesomeIcon
+            icon={faEye}
+            className='rounded-full p-[0.05rem] text-xl ring-2 ring-success'
+          />
           <span>Explore Bear Sightings</span>
         </h3>
         <p>
@@ -41,7 +46,7 @@ const Features = () => {
           onClick={() => router.push('/#map')}
           className='flex items-center space-x-2 font-bold'
         >
-          <Logo className='h-6 w-6' />
+          <Logo className='h-6 w-6 ring-2 ring-success' />
           <span>Mark Your Bear Encounters</span>
         </h3>
         <p>
@@ -52,17 +57,13 @@ const Features = () => {
           <li>
             <p>
               <span className='font-semibold'>1. </span>
-              <Link
-                href='/signin'
-                target='_self'
-                className='font-semibold italic'
+              <button
+                onClick={() => signIn({ callbackUrl: '/' })}
+                className='whitespace-nowrap text-lg font-semibold italic'
               >
-                Sign-in
-              </Link>{' '}
-              <span>
-                with Google to be able to add your own bear sightings to the
-                map.
-              </span>
+                Sign in
+              </button>{' '}
+              <span>with Google.</span>
             </p>
           </li>
           <li>
@@ -89,10 +90,10 @@ const Features = () => {
           onClick={() => setHelpIsOpened(true)}
           className='flex items-center space-x-2 font-bold'
         >
-          <span className='flex h-6 w-6 items-center justify-center rounded-full bg-stone-100 ring-2 ring-warning'>
+          <span className='flex h-6 w-6 items-center justify-center rounded-full bg-stone-100 ring-2 ring-success'>
             <FontAwesomeIcon
               icon={faHelicopter}
-              className='rounded-full text-sm font-extrabold text-warning'
+              className='rounded-full text-sm font-extrabold text-slate-900'
             />
           </span>
           <span>Get Help When You Need It</span>
@@ -109,14 +110,13 @@ const Features = () => {
           <li>
             <p>
               <span className='font-semibold'>1. </span>
-              <Link
-                href='/signin'
-                target='_self'
-                className='font-semibold italic'
+              <button
+                onClick={() => signIn({ callbackUrl: '/' })}
+                className='whitespace-nowrap text-lg font-semibold italic'
               >
-                Sign-in
-              </Link>{' '}
-              <span>with Google</span>
+                Sign in
+              </button>{' '}
+              <span>with Google.</span>
             </p>
           </li>
           <li>
@@ -136,7 +136,7 @@ const Features = () => {
                   <span className='font-light italic'>
                     Add{' '}
                     <span className='font-semibold italic'>
-                      your friend Whatsapp number{' '}
+                      your friend Whatsapp number.{' '}
                     </span>
                   </span>
                 </p>
@@ -146,7 +146,7 @@ const Features = () => {
                   <span className='font-light italic'>
                     Add{' '}
                     <span className='font-semibold italic'>
-                      your blood group type{' '}
+                      your blood group type.{' '}
                     </span>
                   </span>
                 </p>
@@ -156,14 +156,27 @@ const Features = () => {
           <li>
             <p>
               <span className='font-semibold'>3. </span>
-              <Link
-                href='/signin'
-                target='_self'
-                className='font-semibold italic'
-              >
+              <span className='font-semibold italic'>
                 Enable location access
-              </Link>{' '}
-              <span>on your device </span>
+              </span>{' '}
+              <span>on your device.</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <span className='font-semibold'>4. </span>
+              <span
+                onClick={() => setHelpIsOpened(true)}
+                className='inline-flex items-center space-x-2 font-semibold italic'
+              >
+                <span>Click the Get Help button</span>
+                <span className='flex h-6 w-6 items-center justify-center rounded-full bg-stone-100 ring-2 ring-warning'>
+                  <FontAwesomeIcon
+                    icon={faHelicopter}
+                    className='rounded-full text-sm font-extrabold text-warning'
+                  />
+                </span>
+              </span>
             </p>
           </li>
         </ul>
