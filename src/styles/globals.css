@@ -15,13 +15,16 @@ body {
     @apply mb-4 text-center text-3xl font-semibold;
   }
   h2 {
-    @apply mb-2 mt-4 text-xl font-semibold;
+    @apply mb-3 mt-4 text-2xl font-semibold;
   }
   h3 {
     @apply mb-1 mt-3 text-lg;
   }
   p {
     @apply mt-1 text-justify text-lg font-light;
+  }
+  hr {
+    @apply h-[0.075rem] w-full bg-slate-900 dark:h-[0.015rem] dark:bg-stone-100;
   }
 }
 
@@ -48,12 +51,24 @@ body {
   #hero {
     .hero-image {
       /* @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear.png')] bg-cover bg-[center_top_2rem] bg-no-repeat opacity-95 dark:text-opacity-95; */
-      @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear02.png')] bg-cover bg-[center_bottom_0] bg-no-repeat opacity-95 dark:text-opacity-95;
+      /* @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear02.png')] bg-cover bg-[center_bottom_0] bg-no-repeat opacity-95 dark:text-opacity-95; */
+      @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear02.png')] bg-cover bg-[center_top_0.5rem] bg-no-repeat opacity-95 dark:text-opacity-95;
       /* @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear03.png')] bg-cover bg-[right_top_4rem] bg-no-repeat opacity-95 dark:text-opacity-95; */
     }
 
-    .hero-title {
-      @apply z-[500] mt-[var(--hero-mt)] w-full p-[0.75rem] text-right text-stone-100 dark:text-stone-100;
+    .hero-text-wrapper {
+      @apply z-[500]
+      mt-[var(--hero-mt)]
+      w-full
+      pt-6
+      text-center text-stone-100 drop-shadow-md dark:text-stone-100;
     }
+    /* .hero-text-wrapper {
+      @apply z-[500]
+      mt-[var(--hero-mt)]
+      w-full
+      p-[0.75rem]
+      text-center text-stone-100 drop-shadow-md dark:text-stone-100;
+    } */
   }
 }

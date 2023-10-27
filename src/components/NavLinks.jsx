@@ -8,23 +8,24 @@ const NAV_LINKS = [
   },
   {
     id: 2,
-    href: '/signin',
-    text: 'Sign-in with Google',
+    href: '/#map',
+    text: 'Explore Bear Sightings',
   },
+
   {
     id: 3,
-    href: '/about',
-    text: 'About',
-  },
-  {
-    id: 4,
     href: '/privacy-policy',
     text: 'Privacy policy',
   },
   {
-    id: 5,
+    id: 4,
     href: '/tos',
     text: 'Terms of Service',
+  },
+  {
+    id: 5,
+    href: '/about',
+    text: 'About',
   },
 ]
 

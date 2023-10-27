@@ -8,17 +8,20 @@ import Hero from '@/components/Hero'
 import Features from '@/components/Features'
 import MapView from '@/components/MapView'
 import ButtonSwitch from '@/components/ButtonSwitch'
+import Link from 'next/link'
 
 export default function Home(props) {
-  const { setUser } = useAppContext()
+  const { user, setUser } = useAppContext()
   const [bearMarkers, setBearMarkers] = useState(null)
-  const [isEditMode, setIsEditMode] = useState(false)
+  const [isMapEditMode, setIsMapEditMode] = useState(false)
+  const [isFilteredMap, setIsFilteredMap] = useState(false)
+  const [isCenteredMap, setIsCenteredMap] = useState(false)
 
   useEffect(() => {
     // set user on appContext
     setUser(props?.user)
     // set local state
-    setBearMarkers(props.bearMarkers)
+    setBearMarkers(props?.bearMarkers)
   }, [props, setUser])
 
   return (
@@ -32,11 +35,72 @@ export default function Home(props) {
           <Features />
         </section>
 
-        <div id='map' className='scroll-mt-28 px-2'>
-          <ButtonSwitch isEditMode={isEditMode} setIsEditMode={setIsEditMode} />
+        <hr />
+
+        <div id='map' className='scroll-mt-24 px-2'>
+          <h2 className='text-center font-bold'>Bear Sighting Map</h2>
+
+          <div className='my-1 p-2'>
+            <p>
+              Display only{' '}
+              <span className='font-semibold italic'>
+                last week bear sights
+              </span>
+              .
+            </p>
+            <ButtonSwitch
+              label='Filter_Map'
+              isChecked={isFilteredMap}
+              onChange={() => setIsFilteredMap((prev) => !prev)}
+              className='my-2'
+            />
+          </div>
+
+          <div className='my-1 p-2'>
+            <p>
+              <span className='font-semibold italic'>Center </span>
+              the
+              <span className='font-semibold italic'> map around you</span>.
+              <span className='block'>
+                (requires location access for your device.)
+              </span>
+            </p>
+            <ButtonSwitch
+              label='Center_Map'
+              isChecked={isCenteredMap}
+              onChange={() => setIsCenteredMap((prev) => !prev)}
+              className='my-2'
+            />
+          </div>
+
+          <div className='my-1 p-2'>
+            <p>
+              <button
+                onClick={() => signIn({ callbackUrl: '/' })}
+                className='whitespace-nowrap text-lg font-semibold italic'
+              >
+                Sign in
+              </button>
+              , switch the map to{' '}
+              <span className='font-semibold italic'>edit mode</span> and{' '}
+              <span className='font-semibold italic'>
+                add your own bear markers
+              </span>{' '}
+              on a map click.
+            </p>
+
+            <ButtonSwitch
+              label='Edit_Mode'
+              isChecked={isMapEditMode}
+              onChange={() => setIsMapEditMode((prev) => !prev)}
+              className='my-2'
+            />
+          </div>
 
           <MapView
-            isEditMode={isEditMode}
+            isFilteredMap={isFilteredMap}
+            isCenteredMap={isCenteredMap}
+            isMapEditMode={isMapEditMode}
             bearMarkers={bearMarkers}
             setBearMarkers={setBearMarkers}
           />

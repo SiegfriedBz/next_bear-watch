@@ -1,5 +1,8 @@
 import { useState } from 'react'
+import { useSession, signIn, signOut } from 'next-auth/react'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { LogoLink } from './Logo'
 import NavLinks from './NavLinks'
 import ButtonToggleTheme from './ButtonToggleTheme'
@@ -8,6 +11,8 @@ import Modal from './Modal'
 
 const Navbar = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const { data: session, status } = useSession()
+  const username = session?.user?.name?.split(' ')?.[0]
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -18,17 +23,41 @@ const Navbar = () => {
       id='header'
       className='layout-gradient fixed left-0 right-0 top-0 z-[999] border-b px-2 py-4'
     >
-      <div className='flex h-full items-center justify-between'>
+      <div className='relative flex h-full w-full items-center justify-between'>
         <div className='flex items-center space-x-2'>
           <LogoLink />
-          <Link id='brand-link' href='/' target='_self'>
-            <span className='whitespace-nowrap text-xl font-bold italic'>
-              Bear Watch
-            </span>
-          </Link>
+          {!username && (
+            <Link id='brand-link' href='/' target='_self'>
+              <span className='whitespace-nowrap text-lg font-bold italic'>
+                Bear Watch
+              </span>
+            </Link>
+          )}
         </div>
 
-        <div className='flex items-center justify-end space-x-4'>
+        <div className='absolute left-1/2 flex -translate-x-1/2 items-center justify-center space-x-4'>
+          {username && (
+            <div className='flex space-x-4'>
+              <span className='whitespace-nowrap text-lg font-bold italic'>
+                Hi {username}!
+              </span>
+              <button onClick={() => signOut({ callbackUrl: '/' })}>
+                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {!username && (
+          <button
+            onClick={() => signIn({ callbackUrl: '/' })}
+            className='whitespace-nowrap text-lg font-bold italic'
+          >
+            Sign in
+          </button>
+        )}
+
+        <div className='flex items-center space-x-4'>
           <ButtonToggleTheme />
 
           <ButtonMobileBurger

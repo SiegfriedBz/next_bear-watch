@@ -62,6 +62,11 @@ const Hero = () => {
       <div id='hero-image' className='hero-image h-full opacity-100'></div>
 
       {/* <h1 className='hero-title'>Bear Watch</h1> */}
+      <div className='hero-text-wrapper'>
+        <h2 className='text-3xl'>Bear Sighting Map</h2>
+        <h2 className='text-3xl'>Report Bear Encounters</h2>
+        <h2 className='text-3xl'>Send SOS Message</h2>
+      </div>
 
       <MotionButton
         variants={arrowVariants}
