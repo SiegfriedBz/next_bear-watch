@@ -8,6 +8,7 @@ import { faNotesMedical } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
 import { useAppContext } from '@/context/appContext'
 import PageLayout from '@/components/layouts/PageLayout'
+import Head from 'next/head'
 
 const BLOOD_GROUPS = [
   'O_POSITIVE',
@@ -19,6 +20,12 @@ const BLOOD_GROUPS = [
   'AB_POSITIVE',
   'AB_NEGATIVE',
 ]
+
+const meta = {
+  title: 'Bear Watch | My Profile',
+  description:
+    'Fill in your details. Be ready to quickly send your current location to a trusted friend, complete with your blood group information and a link to your precise coordinates on Google Maps',
+}
 
 const Profile = (props) => {
   const { setUser } = useAppContext()
@@ -61,70 +68,79 @@ const Profile = (props) => {
   }
 
   return (
-    <PageLayout>
-      <div className='layout-gradient flex flex-col items-center justify-center pb-20'>
-        <h2 className='text-3xl'>My Profile</h2>
+    <>
+      <Head>
+        <title>{meta.title}</title>
+        <meta content={meta.description} name='description' />
+        <meta property='og:description' content={meta.description} />
+        <meta property='og:title' content={meta.title} />
+      </Head>
 
-        <form
-          onSubmit={handleSubmit}
-          className='mt-8 flex flex-col items-center justify-center space-y-12'
-        >
-          <div className='flex flex-col items-center justify-center'>
-            <label
-              htmlFor='friendWhatsappNumber'
-              className='mb-4 flex items-center space-x-2'
-            >
-              <FontAwesomeIcon
-                icon={faWhatsapp}
-                className='text-2xl text-teal-700 dark:text-teal-500'
-              />
-              <h3 className='font-lightbold'>My Friend&apos;s Whatsapp</h3>
-            </label>
-            <input
-              type='text'
-              id='friendWhatsappNumber'
-              value={friendWhatsappNumber || ''}
-              onChange={(e) => setFriendWhatsappNumber(e.target.value)}
-              className='w-full rounded-md border-2 border-gray-300 px-2 py-2 text-center outline-none dark:text-slate-900 '
-            />
-          </div>
+      <PageLayout>
+        <div className='layout-gradient flex flex-col items-center justify-center pb-20'>
+          <h2 className='text-3xl'>My Profile</h2>
 
-          <div className='flex w-full flex-col items-center justify-center'>
-            <label
-              htmlFor='bloodGroup'
-              className='mb-4 flex items-center space-x-2'
-            >
-              <FontAwesomeIcon
-                icon={faNotesMedical}
-                className='text-2xl text-primary dark:text-primary-light'
-              />
-              <h3 className='font-lightbold'>My Blood Group</h3>
-            </label>
-            <select
-              id='bloodGroup'
-              value={bloodGroup || BLOOD_GROUPS[0]}
-              onChange={(e) => setBloodGroup(e.target.value)}
-              className='w-full rounded-md border-2 border-gray-300 px-2 py-2 text-center outline-none dark:text-slate-900'
-            >
-              {BLOOD_GROUPS.map((bloodGroup) => {
-                return (
-                  <option key={bloodGroup} value={bloodGroup}>
-                    {bloodGroup}
-                  </option>
-                )
-              })}
-            </select>
-          </div>
-
-          <button
-            className='w-full rounded-md bg-primary px-4 py-2 text-stone-100'
-            type='submit'
+          <form
+            onSubmit={handleSubmit}
+            className='mt-8 flex flex-col items-center justify-center space-y-12'
           >
-            Save
-          </button>
-        </form>
-      </div>
-    </PageLayout>
+            <div className='flex flex-col items-center justify-center'>
+              <label
+                htmlFor='friendWhatsappNumber'
+                className='mb-4 flex items-center space-x-2'
+              >
+                <FontAwesomeIcon
+                  icon={faWhatsapp}
+                  className='text-2xl text-teal-700 dark:text-teal-500'
+                />
+                <h3 className='font-lightbold'>My Friend&apos;s Whatsapp</h3>
+              </label>
+              <input
+                type='text'
+                id='friendWhatsappNumber'
+                value={friendWhatsappNumber || ''}
+                onChange={(e) => setFriendWhatsappNumber(e.target.value)}
+                className='w-full rounded-md border-2 border-gray-300 px-2 py-2 text-center outline-none dark:text-slate-900 '
+              />
+            </div>
+
+            <div className='flex w-full flex-col items-center justify-center'>
+              <label
+                htmlFor='bloodGroup'
+                className='mb-4 flex items-center space-x-2'
+              >
+                <FontAwesomeIcon
+                  icon={faNotesMedical}
+                  className='text-2xl text-primary dark:text-primary-light'
+                />
+                <h3 className='font-lightbold'>My Blood Group</h3>
+              </label>
+              <select
+                id='bloodGroup'
+                value={bloodGroup || BLOOD_GROUPS[0]}
+                onChange={(e) => setBloodGroup(e.target.value)}
+                className='w-full rounded-md border-2 border-gray-300 px-2 py-2 text-center outline-none dark:text-slate-900'
+              >
+                {BLOOD_GROUPS.map((bloodGroup) => {
+                  return (
+                    <option key={bloodGroup} value={bloodGroup}>
+                      {bloodGroup}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+
+            <button
+              className='w-full rounded-md bg-primary px-4 py-2 text-stone-100'
+              type='submit'
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </PageLayout>
+    </>
   )
 }
 

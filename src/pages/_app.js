@@ -15,6 +15,12 @@ const roboto = Roboto({
   display: 'swap',
 })
 
+const socialImageConf = generateSocialImage({
+  title: 'Bear Watch',
+  cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  imagePublicID: 'og_social_bear_watch',
+})
+
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
@@ -33,7 +39,7 @@ export default function App({
       `}</style>
 
       <SessionProvider session={session}>
-        <RootLayout>
+        <RootLayout imageUrl={socialImageConf}>
           <Component {...pageProps} />
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=G-L692E7HF9N`}
