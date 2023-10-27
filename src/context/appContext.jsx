@@ -11,8 +11,13 @@ export const useAppContext = () => {
 }
 
 export const AppContextProvider = ({ children }) => {
+  // user fetched from DB (not just from session)
   const [user, setUser] = useState(null)
 
+  // help button state
+  const [helpIsOpened, setHelpIsOpened] = useState(false)
+
+  // Toast notifications helper
   const handleToast = ({ type = 'success', message = '' }) => {
     switch (type) {
       case 'success':
@@ -30,7 +35,9 @@ export const AppContextProvider = ({ children }) => {
   }
 
   return (
-    <AppContext.Provider value={{ user, setUser, handleToast }}>
+    <AppContext.Provider
+      value={{ user, setUser, helpIsOpened, setHelpIsOpened, handleToast }}
+    >
       {children}
     </AppContext.Provider>
   )

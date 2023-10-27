@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAppContext } from '@/context/appContext'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
@@ -7,16 +7,19 @@ import HomePageLayout from '@/components/layouts/HomePageLayout'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
 import MapView from '@/components/MapView'
+import ButtonSwitch from '@/components/ButtonSwitch'
 
 export default function Home(props) {
-  const [bearMarkers, setBearMarkers] = useState(props.bearMarkers)
-  const user = props?.user
   const { setUser } = useAppContext()
+  const [bearMarkers, setBearMarkers] = useState(null)
   const [isEditMode, setIsEditMode] = useState(false)
 
-  if (user) {
-    setUser(user)
-  }
+  useEffect(() => {
+    // set user on appContext
+    setUser(props?.user)
+    // set local state
+    setBearMarkers(props.bearMarkers)
+  }, [props, setUser])
 
   return (
     <HomePageLayout>
@@ -29,20 +32,9 @@ export default function Home(props) {
           <Features />
         </section>
 
-        <div id='map' className='px-2'>
-          <label
-            htmlFor='edit-mode'
-            className='my-2 flex items-center space-x-2'
-          >
-            <input
-              id='edit-mode'
-              value={isEditMode}
-              onChange={() => setIsEditMode((prev) => !prev)}
-              type='checkbox'
-              className='me-2 h-6 w-6 accent-success'
-            />
-            Map Edit mode
-          </label>
+        <div id='map' className='scroll-mt-28 px-2'>
+          <ButtonSwitch isEditMode={isEditMode} setIsEditMode={setIsEditMode} />
+
           <MapView
             isEditMode={isEditMode}
             bearMarkers={bearMarkers}
@@ -59,6 +51,7 @@ export async function getServerSideProps(context) {
 
   const bearMarkers = await prisma.marker.findMany()
 
+  // if no session, return only bearMarkers props
   if (!session) {
     return {
       props: {
@@ -67,19 +60,21 @@ export async function getServerSideProps(context) {
     }
   }
 
+  // if session, server-side get full user data form DB
   const user = await prisma.user.findUnique({
     where: {
       email: session.user.email,
     },
-    // include: {
-    //   markers: true,
-    // },
+    include: {
+      markers: true,
+    },
   })
 
+  // ...and pass user + bearMarkers as props to the Home page component, along with the session data to the SessionProvider
   return {
     props: {
       session,
-      user,
+      user: JSON.parse(JSON.stringify(user)),
       bearMarkers: JSON.parse(JSON.stringify(bearMarkers)),
     },
   }
