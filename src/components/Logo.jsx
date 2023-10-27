@@ -14,7 +14,7 @@ export const Logo = ({ className = '' }) => {
   return (
     <span
       className={twMerge(
-        'inline-flex h-11 w-11 items-center justify-center rounded-full bg-white ring-2 ring-slate-900',
+        'inline-flex h-11 w-11 items-center justify-center rounded-full bg-stone-100 ring-2 ring-slate-900',
         className
       )}
     >

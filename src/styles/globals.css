@@ -53,7 +53,7 @@ body {
     }
 
     .hero-title {
-      @apply z-[500] mt-[var(--hero-mt)] w-full p-[0.75rem] text-right text-white dark:text-white;
+      @apply z-[500] mt-[var(--hero-mt)] w-full p-[0.75rem] text-right text-stone-100 dark:text-stone-100;
     }
   }
 }
