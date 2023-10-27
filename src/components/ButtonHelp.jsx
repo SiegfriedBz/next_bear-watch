@@ -1,13 +1,12 @@
 import { useAppContext } from '@/context/appContext'
+import { getUserLocation } from '@/utils/getUserLocation'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 const ButtonHelp = ({ setHelpIsOpened }) => {
-  const { user } = useAppContext()
-
   const router = useRouter()
-  const { handleToast } = useAppContext()
+  const { user, handleToast } = useAppContext()
   const [helpLinkHref, setHelpLinkHref] = useState(null)
 
   const bloodGroup = user?.bloodGroup
@@ -17,7 +16,6 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
     if (!user) {
       setHelpIsOpened(false)
       setHelpLinkHref(null)
-      router.push('/signin')
       handleToast({
         type: 'error',
         message: 'Please sign-in to be able to get help',
@@ -61,22 +59,6 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
       })
       console.log(error)
     }
-  }
-
-  const getUserLocation = () => {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          resolve(position.coords)
-        },
-        (error) => {
-          reject(error)
-        },
-        {
-          timeout: 10000,
-        }
-      )
-    })
   }
 
   return (
