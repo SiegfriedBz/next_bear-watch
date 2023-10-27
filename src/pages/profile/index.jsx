@@ -21,13 +21,19 @@ const BLOOD_GROUPS = [
 ]
 
 const Profile = (props) => {
-  const [user, setUser] = useState(props.user)
-  const [friendWhatsappNumber, setFriendWhatsappNumber] = useState(
-    user.friendWhatsappNumber
-  )
-  const [bloodGroup, setBloodGroup] = useState(user.bloodGroup)
+  const { setUser } = useAppContext()
+  const [friendWhatsappNumber, setFriendWhatsappNumber] = useState(null)
+  const [bloodGroup, setBloodGroup] = useState(null)
   const router = useRouter()
   const { handleToast } = useAppContext()
+
+  useEffect(() => {
+    // set user on appContext
+    setUser(props.user)
+    // set local state
+    setFriendWhatsappNumber(props.user.friendWhatsappNumber)
+    setBloodGroup(props.user.bloodGroup)
+  }, [props, setUser])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -111,7 +117,7 @@ const Profile = (props) => {
           </div>
 
           <button
-            className='w-full rounded-md bg-primary px-4 py-2 text-white'
+            className='w-full rounded-md bg-primary px-4 py-2 text-stone-100'
             type='submit'
           >
             Save
@@ -127,6 +133,8 @@ export default Profile
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions)
 
+  // protected route
+  // if no session, redirects to sign-in page
   if (!session) {
     return {
       redirect: {
@@ -136,6 +144,7 @@ export async function getServerSideProps(context) {
     }
   }
 
+  // if session, server-side get full user data form DB
   const user = await prisma.user.findUnique({
     where: {
       email: session.user.email,
@@ -145,6 +154,7 @@ export async function getServerSideProps(context) {
     },
   })
 
+  // ...and pass it as props to the Profile page component, along with the session data to the SessionProvider
   return {
     props: {
       session,
