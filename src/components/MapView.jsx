@@ -11,17 +11,8 @@ const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 export default function MapView({ isEditMode, bearMarkers, setBearMarkers }) {
   const { handleToast } = useAppContext()
   const mapRef = useRef(null)
-  const [mapHeight, setMapHeight] = useState(500)
   const [showPopup, setShowPopup] = useState(false)
   const [popup, setPopup] = useState(null)
-
-  // dynamic set map height = f (viewport width) before painting component to the screen
-  useLayoutEffect(() => {
-    if (window == undefined) return
-
-    const width = window.innerWidth
-    setMapHeight(width > 768 ? 800 : 500)
-  }, [])
 
   useEffect(() => {
     if (mapRef?.current == null || !showPopup) return
@@ -80,7 +71,7 @@ export default function MapView({ isEditMode, bearMarkers, setBearMarkers }) {
         longitude: -71.07,
         zoom: 6,
       }}
-      style={{ width: 'auto', height: mapHeight }}
+      style={{ width: 'auto', height: 475 }}
       mapStyle='mapbox://styles/mapbox/outdoors-v12'
     >
       {showPopup && (
