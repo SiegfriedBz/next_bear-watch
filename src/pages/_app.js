@@ -6,6 +6,7 @@ import '@/styles/globals.css'
 import { Roboto } from 'next/font/google'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import generateSocialImage from '@/utils/generateSocialImage'
 config.autoAddCss = false
 
 const roboto = Roboto({
