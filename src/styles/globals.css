@@ -47,7 +47,9 @@ body {
 
   #hero {
     .hero-image {
-      @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear.png')] bg-cover bg-[center_top_2rem] bg-no-repeat opacity-95 dark:text-opacity-95;
+      /* @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear.png')] bg-cover bg-[center_top_2rem] bg-no-repeat opacity-95 dark:text-opacity-95; */
+      @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear02.png')] bg-cover bg-[center_bottom_0] bg-no-repeat opacity-95 dark:text-opacity-95;
+      /* @apply absolute left-0 right-0 top-0 z-[100] h-full max-w-full rounded-[0.25em] bg-[url('/bear03.png')] bg-cover bg-[right_top_4rem] bg-no-repeat opacity-95 dark:text-opacity-95; */
     }
 
     .hero-title {
