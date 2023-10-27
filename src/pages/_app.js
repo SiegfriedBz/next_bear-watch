@@ -6,6 +6,7 @@ import '@/styles/globals.css'
 import { Roboto } from 'next/font/google'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import generateSocialImage from '@/utils/generateSocialImage'
 config.autoAddCss = false
 
 const roboto = Roboto({
@@ -13,6 +14,12 @@ const roboto = Roboto({
   style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
+})
+
+const socialImageConf = generateSocialImage({
+  title: 'Bear Watch',
+  cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  imagePublicID: 'og_social_bear_watch',
 })
 
 export default function App({
@@ -33,7 +40,7 @@ export default function App({
       `}</style>
 
       <SessionProvider session={session}>
-        <RootLayout>
+        <RootLayout imageUrl={socialImageConf}>
           <Component {...pageProps} />
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=G-L692E7HF9N`}
