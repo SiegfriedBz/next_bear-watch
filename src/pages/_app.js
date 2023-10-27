@@ -6,7 +6,6 @@ import '@/styles/globals.css'
 import { Roboto } from 'next/font/google'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import generateSocialImage from '@/utils/generateSocialImage'
 config.autoAddCss = false
 
 const roboto = Roboto({
@@ -16,11 +15,7 @@ const roboto = Roboto({
   display: 'swap',
 })
 
-const socialImageConf = generateSocialImage({
-  title: 'Bear Watch',
-  cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  imagePublicID: 'og_social_bear_watch',
-})
+const socialImageConf = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1698436989/BearWatch/og_social_bear_watch`
 
 export default function App({
   Component,
