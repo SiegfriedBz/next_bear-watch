@@ -1,16 +1,39 @@
 import { useId } from 'react'
+import { twMerge } from 'tailwind-merge'
 
-const ButtonSwitch = ({ isEditMode, setIsEditMode }) => {
+// trick tailwind
+const possibleLabelContentClasses = [
+  'after:content-["Edit_mode"]',
+  'after:content-["Filter_map"]',
+  'after:content-["Center_Map"]',
+]
+
+const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
   const switchId = useId()
 
+  const labelContentClass =
+    label === 'Edit_Mode'
+      ? 'after:content-["Edit_mode"]'
+      : label === 'Filter_Map'
+      ? 'after:content-["Filter_map"]'
+      : label === 'Center_Map'
+      ? 'after:content-["Center_Map"]'
+      : 'after:content-[""]'
+
   return (
-    <div className='my-2 flex h-6 w-[3.25rem] items-center justify-center rounded-lg border border-slate-900 dark:border-stone-100'>
+    <div
+      className={twMerge(
+        'flex h-6 w-[3.25rem] items-center justify-center rounded-lg border border-success ',
+        className
+      )}
+    >
       <label
         htmlFor={`switch-${switchId}}`}
         className={`
               relative
               h-full
               w-full
+
               before:absolute
               before:top-1/2
               before:flex
@@ -21,32 +44,33 @@ const ButtonSwitch = ({ isEditMode, setIsEditMode }) => {
               before:justify-center
               before:rounded-lg
               before:border
-              before:border-slate-900/80 
+            before:border-success
               before:text-xl
               before:font-bold
             before:text-stone-100
-                before:transition
-                before:duration-500
+              before:transition
+              before:duration-500
+
               after:absolute
               after:-right-16
               after:top-1/2
               after:w-[max-content] 
               after:-translate-y-1/2 
               after:translate-x-1/2
-              after:content-["Map_edit_mode"]
+              ${labelContentClass}
               
-              dark:before:border-stone-100/80
+
               ${
-                isEditMode
+                isChecked
                   ? 'before:left-auto before:right-0 before:border-r-0 before:bg-success before:content-["✓"]'
-                  : 'before:left-0 before:right-auto before:border-l-0 before:bg-stone-100 before:content-[""]'
+                  : 'before:left-0 before:right-auto before:border-l-0 before:bg-gray-200 before:content-[""]'
               }`}
       >
         <input
           id={`switch-${switchId}}`}
           type='checkbox'
           className='absolute -left-[10000px]'
-          onChange={() => setIsEditMode((prev) => !prev)}
+          onChange={onChange}
         ></input>
       </label>
     </div>
