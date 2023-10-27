@@ -57,7 +57,7 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
     } catch (error) {
       handleToast({
         type: 'error',
-        message: `${error.message}, 'Please allow location access'`,
+        message: `${error.message}, Please allow location access`,
       })
       console.log(error)
     }
@@ -80,14 +80,17 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
   }
 
   return (
-    <div className='flex h-full w-full flex-col items-center justify-center rounded-full bg-white p-2 text-xl text-warning  transition-all duration-300 hover:bg-warning hover:text-white'>
+    <>
       {helpLinkHref == null ? (
-        <>
-          <button onClick={handleGetHelp} className='whitespace-nowrap'>
+        <div className='flex h-full w-full flex-col items-center justify-center rounded-full bg-stone-100 p-2 '>
+          <button
+            onClick={handleGetHelp}
+            className='space-nowrap text-lg text-warning'
+          >
             Get Help
           </button>
           <button
-            className='text-sm'
+            className='text-sm text-warning/50'
             onClick={(e) => {
               e.stopPropagation()
               setHelpLinkHref(null)
@@ -96,14 +99,18 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
           >
             Cancel
           </button>
-        </>
+        </div>
       ) : (
-        <>
-          <Link href={helpLinkHref} target={'_blank'}>
+        <div className='flex h-full w-full flex-col items-center justify-center rounded-full bg-warning p-2 ring-2 ring-stone-100'>
+          <Link
+            href={helpLinkHref}
+            target={'_blank'}
+            className='text-lg text-stone-100'
+          >
             Confirm
           </Link>
           <button
-            className='text-sm'
+            className='text-sm text-stone-100/50'
             onClick={(e) => {
               e.stopPropagation()
               setHelpLinkHref(null)
@@ -112,9 +119,9 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
           >
             Cancel
           </button>
-        </>
+        </div>
       )}
-    </div>
+    </>
   )
 }
 
