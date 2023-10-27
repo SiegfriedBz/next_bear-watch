@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
 import { prisma } from '../../../server/db/prismaClient'
@@ -134,11 +134,11 @@ export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions)
 
   // protected route
-  // if no session, redirects to sign-in page
+  // if no session, redirects to home page
   if (!session) {
     return {
       redirect: {
-        destination: '/signin',
+        destination: '/',
         permanent: false,
       },
     }
