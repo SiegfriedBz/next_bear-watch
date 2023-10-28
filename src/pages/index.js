@@ -79,7 +79,8 @@ export default function Home(props) {
                 <p>
                   <span className='font-semibold italic'>Center </span>
                   the
-                  <span className='font-semibold'> map on you</span>.
+                  <span className='font-semibold'> map on you</span>
+                  <span> (requires device access to your location).</span>
                 </p>
               </li>
               <li>
@@ -96,7 +97,7 @@ export default function Home(props) {
               </li>
             </ul>
 
-            <div className='mb-1 mt-4 flex w-full items-center justify-start space-x-16 px-4'>
+            <div className='mb-1 mt-4 flex w-full items-center justify-start space-x-16'>
               <ButtonSwitch
                 label='Filter'
                 isChecked={isFilteredMap}

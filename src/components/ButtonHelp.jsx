@@ -17,7 +17,7 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
       setHelpIsOpened(false)
       setHelpLinkHref(null)
       handleToast({
-        type: 'error',
+        type: 'info',
         message: 'Please sign-in to be able to get help',
       })
       return
@@ -28,9 +28,9 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
       setHelpLinkHref(null)
       router.push('/profile')
       handleToast({
-        type: 'error',
+        type: 'info',
         message:
-          'Please fill-in a friend WhatsApp number in your profile, to be able to get help',
+          "Please add a friend's WhatsApp number to your profile, to be able to get help.",
       })
       return
     }
@@ -54,8 +54,8 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
       setHelpLinkHref(`https://wa.me/${friendWhatsapp}?text=${encodedString}`)
     } catch (error) {
       handleToast({
-        type: 'error',
-        message: `${error.message}, Please allow location access`,
+        type: 'info',
+        message: `Please allow location access on your device`,
       })
       console.log(error)
     }
