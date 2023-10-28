@@ -69,7 +69,7 @@ const Features = () => {
           <li>
             <p>
               <span className='font-semibold italic'>Switch </span> the map to
-              <span className='font-semibold italic'> edit mode</span>.
+              <span className='font-semibold italic'> add mode</span>.
             </p>
           </li>
           <li>
