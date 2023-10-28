@@ -10,7 +10,7 @@ const Helicopter = () => {
   return (
     <div
       id='help'
-      className={`fixed right-2 top-[5.6rem] z-[99999] flex h-10 w-10 items-center justify-center rounded-full p-2 transition duration-500 ease-in-out  ${
+      className={`fixed right-2 top-[5.45rem] z-[99999] flex h-10 w-10 items-center justify-center rounded-full p-2 transition duration-500 ease-in-out  ${
         helpIsOpened
           ? 'bg-transparent ring-0'
           : 'bg-stone-100 ring-1 ring-warning'
