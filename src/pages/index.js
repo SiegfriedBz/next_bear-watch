@@ -62,7 +62,7 @@ export default function Home(props) {
 
           <hr />
 
-          <div id='map' className='scroll-mt-24 px-2'>
+          <div id='home-map' className='scroll-mt-24 px-2'>
             <h2 className='text-center font-bold'>Bear Sighting Map</h2>
 
             <p>Tap the switches to enable the map features.</p>
