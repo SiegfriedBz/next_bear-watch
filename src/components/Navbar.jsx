@@ -95,15 +95,15 @@ export default Navbar
 
 const variants = {
   hidden: {
+    y: '-100',
     opacity: 0,
-    y: -100,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.8,
-      duration: 0.4,
+      delay: 1.1,
+      duration: 0.7,
     },
   },
 }

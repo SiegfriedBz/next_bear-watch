@@ -83,7 +83,7 @@ const Hero = () => {
           setArrowIsClicked((prev) => !prev)
           router.push('#features')
         }}
-        className={`absolute bottom-1 z-[500] cursor-pointer text-success dark:text-stone-100/90 ${
+        className={`absolute bottom-0 z-[500] cursor-pointer text-success dark:text-stone-100/90 ${
           arrowIsClicked ? 'animate-none' : 'animate-bounce'
         }`}
       >
@@ -103,7 +103,7 @@ const h2AVariants = {
   show: {
     opacity: 1,
     transition: {
-      delay: 1.4,
+      delay: 2,
       duration: 0.8,
     },
   },
@@ -113,7 +113,7 @@ const h2BVariants = {
   show: {
     opacity: 1,
     transition: {
-      delay: 2.2,
+      delay: 2.8,
       duration: 0.8,
     },
   },
@@ -123,7 +123,7 @@ const h2CVariants = {
   show: {
     opacity: 1,
     transition: {
-      delay: 3,
+      delay: 3.6,
       duration: 0.8,
     },
   },
