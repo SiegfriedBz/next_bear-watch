@@ -20,7 +20,7 @@ const meta = {
 export default function Home(props) {
   const { setUser, handleToast } = useAppContext()
   const [bearMarkers, setBearMarkers] = useState(null)
-  const [isMapEditMode, setIsMapEditMode] = useState(false)
+  const [isMapAddMode, setIsMapAddMode] = useState(false)
   const [isFilteredMap, setIsFilteredMap] = useState(false)
   const [isCenteredMap, setIsCenteredMap] = useState(false)
   const { status } = useSession()
@@ -86,7 +86,7 @@ export default function Home(props) {
               <li>
                 <p>
                   <span className='font-semibold'>Switch</span> to{' '}
-                  <span className='font-semibold italic'>edit mode</span>, and{' '}
+                  <span className='font-semibold italic'>add mode</span>, and{' '}
                   <span className='font-semibold'>click on the map</span>{' '}
                   <span> to </span>
                   <span className='font-semibold'>
@@ -111,10 +111,10 @@ export default function Home(props) {
                 className='my-2'
               />
               <ButtonSwitch
-                label='Edit'
-                isChecked={isMapEditMode}
+                label='Add'
+                isChecked={isMapAddMode}
                 onChange={() => {
-                  isAuthenticated() && setIsMapEditMode((prev) => !prev)
+                  isAuthenticated() && setIsMapAddMode((prev) => !prev)
                 }}
                 className='my-2'
               />
@@ -123,7 +123,7 @@ export default function Home(props) {
             <MapView
               isFilteredMap={isFilteredMap}
               isCenteredMap={isCenteredMap}
-              isMapEditMode={isMapEditMode}
+              isMapAddMode={isMapAddMode}
               bearMarkers={bearMarkers}
               setBearMarkers={setBearMarkers}
             />

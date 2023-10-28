@@ -69,7 +69,7 @@ const Features = () => {
           <li>
             <p>
               <span className='font-semibold italic'>Switch </span> the map to
-              <span className='font-semibold italic'> edit mode</span>.
+              <span className='font-semibold italic'> add mode</span>.
             </p>
           </li>
           <li>
@@ -83,7 +83,7 @@ const Features = () => {
         </ul>
       </div>
 
-      <div className='my-6'>
+      <div className='pb-4'>
         <h3
           onClick={() => setHelpIsOpened(true)}
           className='flex items-center space-x-2 font-bold'

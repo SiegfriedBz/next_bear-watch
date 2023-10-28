@@ -10,6 +10,7 @@ import { useAppContext } from '@/context/appContext'
 import PageLayout from '@/components/layouts/PageLayout'
 import Head from 'next/head'
 import MapView from '@/components/MapView'
+import ButtonSwitch from '@/components/ButtonSwitch'
 
 const BLOOD_GROUPS = [
   'O_POSITIVE',
@@ -34,6 +35,8 @@ const Profile = (props) => {
   const [friendWhatsappNumber, setFriendWhatsappNumber] = useState(null)
   const [bloodGroup, setBloodGroup] = useState(null)
   const [bearMarkers, setBearMarkers] = useState(null)
+  const [isUserBearMarkersOnly, setIsUserBearMarkersOnly] = useState(false)
+  const [isMapEditMode, setIsMapEditMode] = useState(false)
 
   useEffect(() => {
     // set user on appContext
@@ -149,7 +152,27 @@ const Profile = (props) => {
             </button>
           </form>
         </div>
-        <MapView bearMarkers={bearMarkers} setBearMarkers={setBearMarkers} />
+
+        <div className='mb-2 mt-4 flex w-full items-center justify-start space-x-32'>
+          <ButtonSwitch
+            label='My_sights_only'
+            isChecked={isUserBearMarkersOnly}
+            onChange={() => setIsUserBearMarkersOnly((prev) => !prev)}
+            className='my-2'
+          />
+          <ButtonSwitch
+            label='Edit'
+            isChecked={isMapEditMode}
+            onChange={() => setIsMapEditMode((prev) => !prev)}
+            className='my-2'
+          />
+        </div>
+
+        <MapView
+          isMapEditMode={isMapEditMode}
+          bearMarkers={bearMarkers}
+          setBearMarkers={setBearMarkers}
+        />
       </PageLayout>
     </>
   )

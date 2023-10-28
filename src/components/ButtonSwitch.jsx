@@ -5,12 +5,14 @@ const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
   const switchId = useId()
 
   const labelClass =
-    label === 'Edit'
-      ? 'after:content-["Edit"] after:translate-x-1/4 after:-right-[1.5rem]'
+    label === 'Add'
+      ? 'after:content-["Add"] after:translate-x-1/4 after:-right-[1.65rem]'
       : label === 'Filter'
       ? 'after:content-["Filter"] after:translate-x-1/2 after:-right-[1.35rem]'
       : label === 'Center'
       ? 'after:content-["Center"] after:translate-x-1/2 after:-right-[1.75rem]'
+      : label === 'My_sights_only'
+      ? 'after:content-["My_sights_only"] after:translate-x-1/2 after:-right-[3.5rem]'
       : 'after:content-[""]'
 
   return (
