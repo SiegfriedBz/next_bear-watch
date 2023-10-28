@@ -4,7 +4,7 @@
 
 :root {
   --header-height: 5rem;
-  --hero-mt: calc(var(--header-height) + 1rem);
+  --hero-mt: calc(var(--header-height) + 0.625rem);
 }
 
 html,
