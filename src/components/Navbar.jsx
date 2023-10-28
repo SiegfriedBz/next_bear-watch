@@ -7,22 +7,33 @@ import { LogoLink } from './Logo'
 import ButtonToggleTheme from './ButtonToggleTheme'
 import ButtonMobileBurger from './ButtonMobileBurger'
 import Modal from './Modal'
+import { motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 
 const Navbar = () => {
+  const router = useRouter()
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const { data: session, status } = useSession()
   const username = session?.user?.name?.split(' ')?.[0]
   const isLoading = status === 'loading'
   const isAuthenticated = status === 'authenticated'
 
+  const isHomePage =
+    router.pathname === '/' ||
+    router.pathname === '/#features' ||
+    router.pathname === '/#home-map'
+
   const closeModal = () => {
     setModalIsOpen(false)
   }
 
   return (
-    <header
+    <motion.header
+      variants={variants}
+      initial={isHomePage ? 'hidden' : 'visible'}
+      animate='visible'
       id='header'
-      className='layout-gradient fixed left-0 right-0 top-0 z-[999] border-b px-2 py-4'
+      className='layout-gradient fixed left-0 right-0 top-0 z-[999] border-b px-2'
     >
       <div className='relative flex h-full w-full items-center justify-between'>
         <div className='flex items-center space-x-2'>
@@ -76,8 +87,23 @@ const Navbar = () => {
 
       {/* backdrop & menu */}
       <Modal modalIsOpen={modalIsOpen} closeModal={closeModal} />
-    </header>
+    </motion.header>
   )
 }
 
 export default Navbar
+
+const variants = {
+  hidden: {
+    opacity: 0,
+    y: -100,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.8,
+      duration: 0.4,
+    },
+  },
+}
