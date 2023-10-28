@@ -9,7 +9,6 @@ import { Logo } from './Logo'
 const Features = () => {
   const router = useRouter()
   const { setHelpIsOpened } = useAppContext()
-  const { data: session, status } = useSession()
 
   return (
     <>
@@ -53,10 +52,9 @@ const Features = () => {
           Share your experience and help create a bear encounters community to
           benefit all outdoor enthusiasts.
         </p>
-        <ul className='mt-2 ps-1'>
+        <ul className='ms-4 mt-2 list-decimal'>
           <li>
             <p>
-              <span className='font-semibold'>1. </span>
               <button
                 onClick={() => signIn({ callbackUrl: '/' })}
                 className='whitespace-nowrap text-lg font-semibold italic'
@@ -68,14 +66,12 @@ const Features = () => {
           </li>
           <li>
             <p>
-              <span className='font-semibold'>2. </span>
               <span className='font-semibold italic'>Switch </span> the map to
               <span className='font-semibold italic'> edit mode</span>.
             </p>
           </li>
           <li>
             <p>
-              <span className='font-semibold'>3. </span>
               <span className='font-semibold italic'>
                 Add your own bear markers{' '}
               </span>
@@ -106,10 +102,9 @@ const Features = () => {
           to your precise coordinates on Google Maps. Stay connected and ensure
           a swift response when you require assistance.
         </p>
-        <ul className='mt-2 ps-1'>
+        <ul className='ms-4 mt-2 list-decimal'>
           <li>
             <p>
-              <span className='font-semibold'>1. </span>
               <button
                 onClick={() => signIn({ callbackUrl: '/' })}
                 className='whitespace-nowrap text-lg font-semibold italic'
@@ -121,7 +116,6 @@ const Features = () => {
           </li>
           <li>
             <p>
-              <span className='font-semibold'>2. </span>
               <Link
                 href='/profile'
                 target='_self'
@@ -136,7 +130,7 @@ const Features = () => {
                   <span className='font-light italic'>
                     Add{' '}
                     <span className='font-semibold italic'>
-                      your friend Whatsapp number.{' '}
+                      a friend Whatsapp number.{' '}
                     </span>
                   </span>
                 </p>
@@ -155,7 +149,6 @@ const Features = () => {
           </li>
           <li>
             <p>
-              <span className='font-semibold'>3. </span>
               <span className='font-semibold italic'>
                 Enable location access
               </span>{' '}
@@ -164,7 +157,6 @@ const Features = () => {
           </li>
           <li>
             <p>
-              <span className='font-semibold'>4. </span>
               <span
                 onClick={() => setHelpIsOpened(true)}
                 className='inline-flex items-center space-x-2 font-semibold italic'
