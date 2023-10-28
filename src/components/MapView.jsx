@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { useAppContext } from '@/context/appContext'
-import Map, { Marker, Popup } from 'react-map-gl'
+import Map, { Marker, NavigationControl, Popup } from 'react-map-gl'
 import { Logo } from './Logo'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapPopup from './MapPopup'
@@ -10,6 +10,8 @@ import { getUserLocation } from '@/utils/getUserLocation'
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
 const INIT_LATITUDE = 48.43
 const INIT_LONGITUDE = -71.07
+const ZOOM_INIT = 7
+const ZOOM_IN = 16
 
 export default function MapView({
   isFilteredMap,
@@ -49,7 +51,7 @@ export default function MapView({
         mapRef?.current?.flyTo({
           center: [INIT_LONGITUDE, INIT_LATITUDE],
           duration: 5000,
-          zoom: 11,
+          zoom: ZOOM_INIT,
         })
       }
       return
@@ -64,20 +66,22 @@ export default function MapView({
         mapRef?.current?.flyTo({
           center: [longitude, latitude],
           duration: 5000,
-          zoom: 11,
+          zoom: ZOOM_IN,
         })
       }
     })()
   }, [isCenteredMap])
 
+  // center map on bear sighting & zoom in
   useEffect(() => {
     if (mapRef?.current == null || !showPopup) return
 
     const [latitude, longitude] = [popup.latitude, popup.longitude]
+
     mapRef?.current?.flyTo({
-      center: [longitude, latitude + 0.0125],
+      center: [longitude, latitude],
       duration: 2000,
-      zoom: 7,
+      zoom: ZOOM_IN,
     })
   }, [showPopup, popup])
 
@@ -126,11 +130,12 @@ export default function MapView({
       initialViewState={{
         latitude: latitude,
         longitude: longitude,
-        zoom: 6,
+        zoom: ZOOM_INIT,
       }}
       style={{ width: 'auto', height: 475 }}
       mapStyle='mapbox://styles/mapbox/outdoors-v12'
     >
+      <NavigationControl />
       {showPopup && (
         <Popup
           latitude={popup.latitude}
