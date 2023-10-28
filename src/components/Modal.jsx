@@ -49,10 +49,12 @@ const ModalMenu = ({ children }) => {
         border-slate-900
         bg-stone-100/50
         p-4
-        opacity-50 
+        text-slate-900
+        opacity-90
         shadow-sm shadow-slate-900
         dark:border-stone-100 dark:bg-slate-900/50
-        dark:shadow-sm dark:shadow-stone-100
+        dark:text-white dark:shadow-sm
+        dark:shadow-stone-100
         sm:mx-12 md:mx-24 2xl:hidden'
       onClick={(e) => e.stopPropagation()}
     >
