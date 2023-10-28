@@ -67,7 +67,7 @@ const Li = ({ href = '', onClick, children }) => {
       <Link
         href={href}
         target='_self'
-        className='my-2 inline-block text-2xl font-bold'
+        className='my-2 inline-block text-2xl font-extrabold'
       >
         {children}
       </Link>

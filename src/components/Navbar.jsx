@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { LogoLink } from './Logo'
-import NavLinks from './NavLinks'
 import ButtonToggleTheme from './ButtonToggleTheme'
 import ButtonMobileBurger from './ButtonMobileBurger'
 import Modal from './Modal'
@@ -76,17 +75,7 @@ const Navbar = () => {
       </div>
 
       {/* backdrop & menu */}
-      {modalIsOpen && (
-        <Modal
-          modalIsOpen={modalIsOpen}
-          closeModal={closeModal}
-          className={modalIsOpen ? 'z-[999]' : 'z-0'}
-        >
-          <div className='w-full py-1'>
-            <NavLinks modal={true} closeModal={closeModal} />
-          </div>
-        </Modal>
-      )}
+      <Modal modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </header>
   )
 }
