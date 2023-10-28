@@ -3,14 +3,24 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHelicopter } from '@fortawesome/free-solid-svg-icons'
 import ButtonHelp from './ButtonHelp'
+import { useRouter } from 'next/router'
 
 const Helicopter = () => {
+  const router = useRouter()
   const { helpIsOpened, setHelpIsOpened } = useAppContext()
 
+  const isHomePage =
+    router.pathname === '/' ||
+    router.pathname === '/#features' ||
+    router.pathname === '/#home-map'
+
   return (
-    <div
+    <motion.div
+      variants={variants}
+      initial={isHomePage ? 'hidden' : 'visible'}
+      animate='visible'
       id='help'
-      className={`fixed right-2 top-[5.45rem] z-[99999] flex h-10 w-10 items-center justify-center rounded-full p-2 transition duration-500 ease-in-out  ${
+      className={`fixed right-2 top-[5.45rem] z-[900] flex h-10 w-10 items-center justify-center rounded-full p-2 transition duration-500 ease-in-out  ${
         helpIsOpened
           ? 'bg-transparent ring-0'
           : 'bg-stone-100 ring-1 ring-warning'
@@ -43,8 +53,21 @@ const Helicopter = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }
 
 export default Helicopter
+
+const variants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 4,
+      duration: 0.3,
+    },
+  },
+}
