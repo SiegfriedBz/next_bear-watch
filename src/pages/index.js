@@ -96,7 +96,7 @@ export default function Home(props) {
               </li>
             </ul>
 
-            <div className='mt-4 flex w-full items-center justify-start space-x-20'>
+            <div className='mb-1 mt-4 flex w-full items-center justify-start space-x-16 px-4'>
               <ButtonSwitch
                 label='Filter'
                 isChecked={isFilteredMap}
