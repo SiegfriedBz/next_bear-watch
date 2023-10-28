@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useSession, signIn } from 'next-auth/react'
 
 const NAV_LINKS = [
   {
@@ -29,22 +30,26 @@ const NAV_LINKS = [
   },
 ]
 
-const NavLinks = ({ className = '', modal = false, closeModal }) => {
+const NavLinks = ({ className = '', closeModal }) => {
+  const { status } = useSession()
+
+  // enforce sign-in to access profile page
+  const checkIfAuthenticated = () => {
+    return status === 'unauthenticated'
+      ? signIn('google', { callbackUrl: '/profile' })
+      : closeModal()
+  }
+
   return (
-    <ul
-      className={`${
-        modal ? 'flex-col' : 'justify-end space-x-4'
-      } flex h-full w-full items-center ${className}`}
-    >
-      {/* nav links */}
+    <ul className={`flex h-full w-full flex-col items-center ${className}`}>
       {NAV_LINKS?.map((link) => {
         return (
           <Li
             key={link.id}
             href={link.href}
-            className={link.className}
-            modal={modal}
-            closeModal={closeModal}
+            onClick={() => {
+              link.href === '/profile' ? checkIfAuthenticated() : closeModal()
+            }}
           >
             {link.text}
           </Li>
@@ -56,20 +61,9 @@ const NavLinks = ({ className = '', modal = false, closeModal }) => {
 
 export default NavLinks
 
-const Li = ({
-  className = '',
-  href = '',
-  modal = false,
-  closeModal,
-  children,
-}) => {
+const Li = ({ href = '', onClick, children }) => {
   return (
-    <li
-      className={className}
-      onClick={() => {
-        modal && closeModal()
-      }}
-    >
+    <li onClick={onClick}>
       <Link
         href={href}
         target='_self'
