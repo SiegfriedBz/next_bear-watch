@@ -1,38 +1,30 @@
 import { useId } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-// trick tailwind
-const possibleLabelContentClasses = [
-  'after:content-["Edit_mode"]',
-  'after:content-["Filter_map"]',
-  'after:content-["Center_Map"]',
-]
-
 const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
   const switchId = useId()
 
-  const labelContentClass =
-    label === 'Edit_Mode'
-      ? 'after:content-["Edit_mode"]'
-      : label === 'Filter_Map'
-      ? 'after:content-["Filter_map"]'
-      : label === 'Center_Map'
-      ? 'after:content-["Center_Map"]'
+  const labelClass =
+    label === 'Edit'
+      ? 'after:content-["Edit"] after:translate-x-1/4 after:-right-[1.5rem]'
+      : label === 'Filter'
+      ? 'after:content-["Filter"] after:translate-x-1/2 after:-right-[1.35rem]'
+      : label === 'Center'
+      ? 'after:content-["Center"] after:translate-x-1/2 after:-right-[1.75rem]'
       : 'after:content-[""]'
 
   return (
     <div
-      className={twMerge(
-        'flex h-6 w-[3.25rem] items-center justify-center rounded-lg border border-success ',
-        className
-      )}
+      key={switchId}
+      className={twMerge('flex h-6 items-center justify-center', className)}
     >
       <label
         htmlFor={`switch-${switchId}}`}
         className={`
               relative
               h-full
-              w-full
+              w-[3.5rem]
+              rounded-lg border border-success
 
               before:absolute
               before:top-1/2
@@ -49,17 +41,14 @@ const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
               before:font-bold
             before:text-stone-100
               before:transition
-              before:duration-500
+              before:duration-700
 
-              after:absolute
-              after:-right-16
+              after:absolute  
               after:top-1/2
               after:w-[max-content] 
               after:-translate-y-1/2 
-              after:translate-x-1/2
-              ${labelContentClass}
+              ${labelClass}
               
-
               ${
                 isChecked
                   ? 'before:left-auto before:right-0 before:border-r-0 before:bg-success before:content-["✓"]'
