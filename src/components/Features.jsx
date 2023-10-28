@@ -83,7 +83,7 @@ const Features = () => {
         </ul>
       </div>
 
-      <div className='my-6'>
+      <div className='pb-4'>
         <h3
           onClick={() => setHelpIsOpened(true)}
           className='flex items-center space-x-2 font-bold'
