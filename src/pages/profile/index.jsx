@@ -36,7 +36,7 @@ const Profile = (props) => {
   const [bloodGroup, setBloodGroup] = useState(null)
   const [bearMarkers, setBearMarkers] = useState(null)
   const [isUserBearMarkersOnly, setIsUserBearMarkersOnly] = useState(false)
-  const [isMapEditMode, setIsMapEditMode] = useState(false)
+  const [isMapAddMode, setIsMapAddMode] = useState(false)
 
   useEffect(() => {
     // set user on appContext
@@ -161,15 +161,15 @@ const Profile = (props) => {
             className='my-2'
           />
           <ButtonSwitch
-            label='Edit'
-            isChecked={isMapEditMode}
-            onChange={() => setIsMapEditMode((prev) => !prev)}
+            label='Add'
+            isChecked={isMapAddMode}
+            onChange={() => setIsMapAddMode((prev) => !prev)}
             className='my-2'
           />
         </div>
 
         <MapView
-          isMapEditMode={isMapEditMode}
+          isMapAddMode={isMapAddMode}
           bearMarkers={bearMarkers}
           setBearMarkers={setBearMarkers}
         />

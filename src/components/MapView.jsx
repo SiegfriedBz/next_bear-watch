@@ -16,7 +16,7 @@ const ZOOM_IN = 16
 export default function MapView({
   isFilteredMap,
   isCenteredMap,
-  isMapEditMode,
+  isMapAddMode,
   bearMarkers,
   setBearMarkers,
 }) {
@@ -93,7 +93,7 @@ export default function MapView({
 
   // add bear marker to db if user signed in and map is in edit mode
   const onAddBearMarker = async (e) => {
-    if (!user || !isMapEditMode) return
+    if (!user || !isMapAddMode) return
 
     try {
       const { lng: longitude, lat: latitude } = e.lngLat
