@@ -169,6 +169,7 @@ const Profile = (props) => {
         </div>
 
         <MapView
+          isUserBearMarkersOnly={isUserBearMarkersOnly}
           isMapAddMode={isMapAddMode}
           bearMarkers={bearMarkers}
           setBearMarkers={setBearMarkers}
