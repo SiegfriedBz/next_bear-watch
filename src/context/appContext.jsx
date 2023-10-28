@@ -23,6 +23,9 @@ export const AppContextProvider = ({ children }) => {
       case 'success':
         toast.success(message)
         break
+      case 'info':
+        toast.info(message)
+        break
       case 'error':
         toast.error(message)
         break
