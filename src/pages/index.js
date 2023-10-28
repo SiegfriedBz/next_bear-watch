@@ -63,7 +63,7 @@ export default function Home(props) {
           <hr />
 
           <div id='home-map' className='scroll-mt-24 px-2'>
-            <h2 className='text-center font-bold'>Bear Sighting Map</h2>
+            <h2 className='pt-8 text-center font-bold'>Bear Sighting Map</h2>
 
             <p>Tap the switches to enable the map features.</p>
             <ul className='my-4 ms-4 list-disc space-y-2'>
@@ -97,7 +97,7 @@ export default function Home(props) {
               </li>
             </ul>
 
-            <div className='mb-1 mt-4 flex w-full items-center justify-start space-x-16'>
+            <div className='mb-2 mt-4 flex w-full items-center justify-start space-x-16'>
               <ButtonSwitch
                 label='Filter'
                 isChecked={isFilteredMap}

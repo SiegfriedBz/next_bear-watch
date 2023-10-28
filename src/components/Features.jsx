@@ -12,7 +12,9 @@ const Features = () => {
 
   return (
     <>
-      <h2 className='text-center font-bold'>Bear Watch&apos;s Key Features</h2>
+      <h2 className='pt-8 text-center font-bold'>
+        Bear Watch&apos;s Key Features
+      </h2>
       <p>
         Bear Watch is your ultimate companion for outdoor adventures. Whether
         you&apos;re an enthusiastic hiker, seasoned camper, or a nature lover,

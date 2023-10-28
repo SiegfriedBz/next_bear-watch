@@ -89,7 +89,7 @@ const Hero = () => {
       >
         <FontAwesomeIcon
           icon={faCircleDown}
-          className='rounded-full bg-transparent text-4xl ring-2 ring-stone-100 dark:bg-slate-900 dark:bg-transparent dark:ring-0'
+          className='rounded-full bg-transparent text-4xl ring-2 ring-stone-100 dark:bg-slate-900 dark:bg-transparent dark:ring-success'
         />
       </MotionButton>
     </div>
