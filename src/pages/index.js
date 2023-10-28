@@ -20,8 +20,11 @@ const meta = {
 export default function Home(props) {
   const { setUser, handleToast } = useAppContext()
   const [bearMarkers, setBearMarkers] = useState(null)
+  // add marker mode
   const [isMapAddMode, setIsMapAddMode] = useState(false)
-  const [isFilteredMap, setIsFilteredMap] = useState(false)
+  // map filters mode - display only last week's bear sightings
+  const [isWeeklyMap, setIsWeeklyMap] = useState(false)
+  // center map on user location
   const [isCenteredMap, setIsCenteredMap] = useState(false)
   const { status } = useSession()
 
@@ -100,8 +103,8 @@ export default function Home(props) {
             <div className='mb-2 mt-4 flex w-full items-center justify-start space-x-16'>
               <ButtonSwitch
                 label='Filter'
-                isChecked={isFilteredMap}
-                onChange={() => setIsFilteredMap((prev) => !prev)}
+                isChecked={isWeeklyMap}
+                onChange={() => setIsWeeklyMap((prev) => !prev)}
                 className='my-2'
               />
               <ButtonSwitch
@@ -121,7 +124,7 @@ export default function Home(props) {
             </div>
 
             <MapView
-              isFilteredMap={isFilteredMap}
+              isWeeklyMap={isWeeklyMap}
               isCenteredMap={isCenteredMap}
               isMapAddMode={isMapAddMode}
               bearMarkers={bearMarkers}

@@ -14,7 +14,7 @@ const ZOOM_INIT = 7
 const ZOOM_IN = 16
 
 export default function MapView({
-  isFilteredMap,
+  isWeeklyMap,
   isCenteredMap,
   isMapAddMode,
   bearMarkers,
@@ -29,7 +29,7 @@ export default function MapView({
   const [filteredBearMarkers, setFilteredBearMarkers] = useState(null)
 
   useEffect(() => {
-    if (isFilteredMap) {
+    if (isWeeklyMap) {
       // display only last week's bear sightings
       const filteredMarkers = bearMarkers?.filter((marker) => {
         return bearWasSeenWithinLastweek(marker.createdAt)
@@ -39,7 +39,7 @@ export default function MapView({
     } else {
       setFilteredBearMarkers(bearMarkers)
     }
-  }, [isFilteredMap, bearMarkers])
+  }, [isWeeklyMap, bearMarkers])
 
   // center map on user location
   useEffect(() => {
