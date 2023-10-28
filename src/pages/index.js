@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
-import { useAppContext } from '@/context/appContext'
-import { authOptions } from './api/auth/[...nextauth]'
+import Head from 'next/head'
+import { useSession } from 'next-auth/react'
 import { getServerSession } from 'next-auth'
+import { authOptions } from './api/auth/[...nextauth]'
+import { useAppContext } from '@/context/appContext'
 import { prisma } from '../../server/db/prismaClient'
 import HomePageLayout from '@/components/layouts/HomePageLayout'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
 import MapView from '@/components/MapView'
 import ButtonSwitch from '@/components/ButtonSwitch'
-import Head from 'next/head'
 
 const meta = {
   title: 'Bear Watch | Home',
@@ -17,11 +18,12 @@ const meta = {
 }
 
 export default function Home(props) {
-  const { setUser } = useAppContext()
+  const { setUser, handleToast } = useAppContext()
   const [bearMarkers, setBearMarkers] = useState(null)
   const [isMapEditMode, setIsMapEditMode] = useState(false)
   const [isFilteredMap, setIsFilteredMap] = useState(false)
   const [isCenteredMap, setIsCenteredMap] = useState(false)
+  const { status } = useSession()
 
   useEffect(() => {
     // set user on appContext
@@ -29,6 +31,15 @@ export default function Home(props) {
     // set local state
     setBearMarkers(props?.bearMarkers)
   }, [props, setUser])
+
+  const isAuthenticated = () => {
+    return status === 'authenticated'
+      ? true
+      : handleToast({
+          type: 'info',
+          message: 'Please sign-in to add your own bear sights.',
+        }) && false
+  }
 
   return (
     <>
@@ -54,59 +65,56 @@ export default function Home(props) {
           <div id='map' className='scroll-mt-24 px-2'>
             <h2 className='text-center font-bold'>Bear Sighting Map</h2>
 
-            <div className='my-1 p-2'>
-              <p>
-                Display only{' '}
-                <span className='font-semibold italic'>
-                  last week bear sights
-                </span>
-                .
-              </p>
+            <p>Tap the switches to enable the map features.</p>
+            <ul className='my-4 ms-4 list-disc space-y-2'>
+              <li>
+                <p>
+                  <span className='font-semibold italic'>Filter </span>
+                  <span> to </span>
+                  <span className='font-semibold'> show last week</span>
+                  <span> bear sights.</span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span className='font-semibold italic'>Center </span>
+                  the
+                  <span className='font-semibold'> map on you</span>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span className='font-semibold'>Switch</span> to{' '}
+                  <span className='font-semibold italic'>edit mode</span>, and{' '}
+                  <span className='font-semibold'>click on the map</span>{' '}
+                  <span> to </span>
+                  <span className='font-semibold'>
+                    add your own bear sights
+                  </span>
+                  .
+                </p>
+              </li>
+            </ul>
+
+            <div className='mt-4 flex w-full items-center justify-start space-x-20'>
               <ButtonSwitch
-                label='Filter_Map'
+                label='Filter'
                 isChecked={isFilteredMap}
                 onChange={() => setIsFilteredMap((prev) => !prev)}
                 className='my-2'
               />
-            </div>
-
-            <div className='my-1 p-2'>
-              <p>
-                <span className='font-semibold italic'>Center </span>
-                the
-                <span className='font-semibold italic'> map around you</span>.
-                <span className='block'>
-                  (requires location access for your device.)
-                </span>
-              </p>
               <ButtonSwitch
-                label='Center_Map'
+                label='Center'
                 isChecked={isCenteredMap}
                 onChange={() => setIsCenteredMap((prev) => !prev)}
                 className='my-2'
               />
-            </div>
-
-            <div className='my-1 p-2'>
-              <p>
-                <button
-                  onClick={() => signIn({ callbackUrl: '/' })}
-                  className='whitespace-nowrap text-lg font-semibold italic'
-                >
-                  Sign in
-                </button>
-                , switch the map to{' '}
-                <span className='font-semibold italic'>edit mode</span> and{' '}
-                <span className='font-semibold italic'>
-                  add your own bear markers
-                </span>{' '}
-                on a map click.
-              </p>
-
               <ButtonSwitch
-                label='Edit_Mode'
+                label='Edit'
                 isChecked={isMapEditMode}
-                onChange={() => setIsMapEditMode((prev) => !prev)}
+                onChange={() => {
+                  isAuthenticated() && setIsMapEditMode((prev) => !prev)
+                }}
                 className='my-2'
               />
             </div>
