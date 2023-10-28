@@ -13,6 +13,8 @@ const Navbar = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const { data: session, status } = useSession()
   const username = session?.user?.name?.split(' ')?.[0]
+  const isLoading = status === 'loading'
+  const isAuthenticated = status === 'authenticated'
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -26,7 +28,7 @@ const Navbar = () => {
       <div className='relative flex h-full w-full items-center justify-between'>
         <div className='flex items-center space-x-2'>
           <LogoLink />
-          {!username && (
+          {!isAuthenticated && (
             <Link id='brand-link' href='/' target='_self'>
               <span className='whitespace-nowrap text-lg font-bold italic'>
                 Bear Watch
@@ -36,7 +38,7 @@ const Navbar = () => {
         </div>
 
         <div className='absolute left-1/2 flex -translate-x-1/2 items-center justify-center space-x-4'>
-          {username && (
+          {isAuthenticated && username && (
             <div className='flex space-x-4'>
               <span className='whitespace-nowrap text-lg font-bold italic'>
                 Hi {username}!
@@ -48,14 +50,20 @@ const Navbar = () => {
           )}
         </div>
 
-        {!username && (
+        {isLoading ? (
+          <div className='flex items-center justify-center space-x-2'>
+            <div className='h-2 w-2 animate-pulse rounded-full bg-stone-100'></div>
+            <div className='h-2 w-2 animate-pulse rounded-full bg-stone-100'></div>
+            <div className='h-2 w-2 animate-pulse rounded-full bg-stone-100'></div>
+          </div>
+        ) : !isAuthenticated ? (
           <button
             onClick={() => signIn({ callbackUrl: '/' })}
             className='whitespace-nowrap text-lg font-bold italic'
           >
             Sign in
           </button>
-        )}
+        ) : null}
 
         <div className='flex items-center space-x-4'>
           <ButtonToggleTheme />
