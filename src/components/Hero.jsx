@@ -4,19 +4,6 @@ import { motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleDown } from '@fortawesome/free-solid-svg-icons'
 
-const arrowVariants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      delay: 1.2,
-      duration: 0.3,
-    },
-  },
-}
-
 const MotionButton = motion.button
 
 const Hero = () => {
@@ -44,7 +31,7 @@ const Hero = () => {
   // 1. server-side render image h-screen (reserve space for hero image)
   if (!isClient) {
     return (
-      <div className='h-screen w-full'>
+      <div className='h-[100vh] w-full'>
         <div
           id='hero-image-server'
           className='hero-image h-full opacity-100'
@@ -61,11 +48,31 @@ const Hero = () => {
     >
       <div id='hero-image' className='hero-image h-full opacity-100'></div>
 
-      {/* <h1 className='hero-title'>Bear Watch</h1> */}
       <div className='hero-text-wrapper'>
-        <h2 className='text-3xl'>Bear Sighting Map</h2>
-        <h2 className='text-3xl'>Report Bear Encounters</h2>
-        <h2 className='text-3xl'>Send SOS Message</h2>
+        <motion.h2
+          variants={h2AVariants}
+          initial='hidden'
+          animate='show'
+          className='text-3xl font-extrabold'
+        >
+          Bear Sighting Map
+        </motion.h2>
+        <motion.h2
+          variants={h2BVariants}
+          initial='hidden'
+          animate='show'
+          className='text-3xl font-extrabold'
+        >
+          Report Bear Encounters
+        </motion.h2>
+        <motion.h2
+          variants={h2CVariants}
+          initial='hidden'
+          animate='show'
+          className='text-3xl font-extrabold'
+        >
+          Send SOS Message
+        </motion.h2>
       </div>
 
       <MotionButton
@@ -82,7 +89,7 @@ const Hero = () => {
       >
         <FontAwesomeIcon
           icon={faCircleDown}
-          className='rounded-full bg-transparent text-4xl ring-[0.05rem] ring-stone-100 dark:bg-slate-900 dark:bg-transparent dark:ring-0'
+          className='rounded-full bg-transparent text-4xl ring-2 ring-stone-100 dark:bg-slate-900 dark:bg-transparent dark:ring-0'
         />
       </MotionButton>
     </div>
@@ -90,3 +97,47 @@ const Hero = () => {
 }
 
 export default Hero
+
+const h2AVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delay: 1.4,
+      duration: 0.8,
+    },
+  },
+}
+const h2BVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delay: 2.2,
+      duration: 0.8,
+    },
+  },
+}
+const h2CVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delay: 3,
+      duration: 0.8,
+    },
+  },
+}
+
+const arrowVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 4.3,
+      duration: 0.3,
+    },
+  },
+}
