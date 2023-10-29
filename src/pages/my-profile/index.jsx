@@ -29,7 +29,7 @@ const meta = {
 }
 
 const Profile = (props) => {
-  const { setUser, setBearMarkers } = useAppContext()
+  const { setUser, setBearMarkers, handleToast } = useAppContext()
   const [friendWhatsappNumber, setFriendWhatsappNumber] = useState(null)
   const [bloodGroup, setBloodGroup] = useState(null)
   const [isUserBearMarkersOnly, setIsUserBearMarkersOnly] = useState(false)
@@ -63,6 +63,8 @@ const Profile = (props) => {
             setFriendWhatsappNumber={setFriendWhatsappNumber}
             bloodGroup={bloodGroup}
             setBloodGroup={setBloodGroup}
+            setUser={setUser}
+            handleToast={handleToast}
           />
 
           <div id='my-profile-map scroll-mt-24'>
@@ -91,12 +93,14 @@ const Form = ({
   setFriendWhatsappNumber,
   bloodGroup,
   setBloodGroup,
+  setUser,
+  handleToast,
 }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      const response = await fetch('/api/my-profile', {
+      const response = await fetch('/api/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +114,7 @@ const Form = ({
       const data = await response.json()
 
       setUser(data)
-      handleToast({ type: 'primary', message: 'Profile saved primaryfully!' })
+      handleToast({ type: 'primary', message: 'Profile saved successfully!' })
       router.push('/')
     } catch (error) {
       console.log(error)
