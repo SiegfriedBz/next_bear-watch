@@ -53,7 +53,7 @@ const Hero = () => {
           variants={h2AVariants}
           initial='hidden'
           animate='show'
-          className='text-3xl font-extrabold'
+          className='text-cfg-white text-3xl font-extrabold'
         >
           Bear Sighting Map
         </motion.h2>
@@ -61,7 +61,7 @@ const Hero = () => {
           variants={h2BVariants}
           initial='hidden'
           animate='show'
-          className='text-3xl font-extrabold'
+          className='text-cfg-white text-3xl font-extrabold'
         >
           Report Bear Encounters
         </motion.h2>
@@ -69,7 +69,7 @@ const Hero = () => {
           variants={h2CVariants}
           initial='hidden'
           animate='show'
-          className='text-3xl font-extrabold'
+          className='text-cfg-white text-3xl font-extrabold'
         >
           Send SOS Message
         </motion.h2>
@@ -83,13 +83,13 @@ const Hero = () => {
           setArrowIsClicked((prev) => !prev)
           router.push('#features')
         }}
-        className={`absolute bottom-0 z-[500] cursor-pointer text-success dark:text-stone-100/90 ${
+        className={`dark:text-cfg-white  absolute bottom-0 z-[500] cursor-pointer text-primary ${
           arrowIsClicked ? 'animate-none' : 'animate-bounce'
         }`}
       >
         <FontAwesomeIcon
           icon={faCircleDown}
-          className='rounded-full bg-transparent text-4xl ring-2 ring-stone-100 dark:bg-slate-900 dark:bg-transparent dark:ring-success'
+          className='ring-cfg-white bg-cfg-white rounded-full text-4xl ring-2 dark:bg-transparent dark:ring-primary'
         />
       </MotionButton>
     </div>
@@ -136,7 +136,7 @@ const arrowVariants = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 4.3,
+      delay: 4.6,
       duration: 0.3,
     },
   },

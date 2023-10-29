@@ -4,7 +4,7 @@
 
 :root {
   --header-height: 5rem;
-  --hero-mt: calc(var(--header-height) + 0.625rem);
+  --hero-mt: calc(var(--header-height) - 0.25rem);
 }
 
 html,
@@ -14,19 +14,47 @@ body {
 
 @layer base {
   h1 {
-    @apply mb-4 text-center text-3xl font-semibold;
+    @apply dark:text-cfg-white mb-4 text-center text-3xl font-semibold text-primary;
   }
   h2 {
-    @apply mb-3 mt-4 text-2xl font-semibold;
+    @apply dark:text-cfg-white mb-3 mt-4 text-2xl font-semibold text-primary;
   }
   h3 {
-    @apply mb-1 mt-3 text-lg;
+    @apply dark:text-cfg-white mb-1 mt-3 text-xl text-primary;
   }
   p {
     @apply mt-1 text-justify text-lg font-light;
   }
+
+  .text-color {
+    @apply dark:text-cfg-white text-primary;
+  }
+
   hr {
-    @apply h-[0.075rem] w-full bg-slate-900 dark:h-[0.015rem] dark:bg-stone-100;
+    @apply bg-cfg-black dark:bg-cfg-white h-[0.075rem] w-full dark:h-[0.015rem];
+  }
+
+  input,
+  select {
+    @apply dark:text-cfg-black w-full rounded-md border-2 border-primary py-1 text-center outline-none focus:shadow-sm focus:shadow-primary-light dark:border-primary-light dark:focus:shadow-primary-light;
+  }
+
+  button.btn {
+    @apply text-cfg-white dark:text-cfg-white
+    dark:border-cfg-white 
+      my-4
+      w-full rounded-md border
+    bg-primary 
+      px-4 
+      py-2 text-xl 
+      font-extrabold uppercase tracking-wider transition 
+      duration-300 hover:scale-105
+      hover:shadow-sm 
+    
+      hover:shadow-primary-light
+      focus:scale-105
+        focus:shadow-sm
+      focus:shadow-primary-light;
   }
 }
 
@@ -39,11 +67,11 @@ body {
   /* non-home page layout */
   .page-layout {
     /* mt-[Xrem] to push the content below the navbar on non-home pages */
-    @apply relative mt-[var(--header-height)] scroll-mt-[8rem] px-4 py-8;
+    @apply relative mt-[var(--header-height)] scroll-mt-[8rem] px-2 py-8;
   }
 
   .layout-gradient {
-    @apply bg-gradient-to-r from-stone-100 to-stone-50 text-slate-900 dark:from-slate-900 dark:to-slate-900 dark:text-stone-100;
+    @apply text-cfg-black dark:from-cfg-black dark:to-cfg-black from-cfg-white dark:text-cfg-white bg-gradient-to-r to-stone-50;
   }
 
   #header {
@@ -56,11 +84,11 @@ body {
     }
 
     .hero-text-wrapper {
-      @apply z-[500]
+      @apply text-cfg-white
+      dark:text-cfg-white
+      z-[500]
       mt-[var(--hero-mt)]
-      w-full
-      pt-6
-      text-center text-stone-100 drop-shadow-md dark:text-stone-100;
+      w-full pt-6 text-center drop-shadow-md;
     }
   }
 }

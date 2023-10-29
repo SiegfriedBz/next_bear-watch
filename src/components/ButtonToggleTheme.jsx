@@ -32,7 +32,7 @@ const ButtonToggleTheme = () => {
     <button
       id='button-toggle-theme'
       onClick={toggleColorMode}
-      className='text-2xl text-amber-500 dark:text-stone-100'
+      className='text-secondary dark:text-cfg-white text-2xl'
     >
       {toggleIcon}
     </button>

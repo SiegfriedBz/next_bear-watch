@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useSession, signIn, signOut } from 'next-auth/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { LogoLink } from './Logo'
 import ButtonToggleTheme from './ButtonToggleTheme'
 import ButtonMobileBurger from './ButtonMobileBurger'
 import Modal from './Modal'
-import { motion } from 'framer-motion'
-import { useRouter } from 'next/router'
 
 const Navbar = () => {
   const router = useRouter()
@@ -21,7 +21,7 @@ const Navbar = () => {
   const isHomePage =
     router.pathname === '/' ||
     router.pathname === '/#features' ||
-    router.pathname === '/#home-map'
+    router.pathname === '/#map'
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -37,7 +37,10 @@ const Navbar = () => {
     >
       <div className='relative flex h-full w-full items-center justify-between'>
         <div className='flex items-center space-x-2'>
-          <LogoLink />
+          <span className='ring-cfg-black dark:ring-cfg-white rounded-full ring-1 dark:ring-2'>
+            <LogoLink />
+          </span>
+
           {!isAuthenticated && (
             <Link id='brand-link' href='/' target='_self'>
               <span className='whitespace-nowrap text-lg font-bold italic'>
@@ -62,9 +65,9 @@ const Navbar = () => {
 
         {isLoading ? (
           <div className='flex items-center justify-center space-x-2'>
-            <div className='h-2 w-2 animate-pulse rounded-full bg-stone-100'></div>
-            <div className='h-2 w-2 animate-pulse rounded-full bg-stone-100'></div>
-            <div className='h-2 w-2 animate-pulse rounded-full bg-stone-100'></div>
+            <div className='bg-cfg-white h-2 w-2 animate-pulse rounded-full'></div>
+            <div className='bg-cfg-white h-2 w-2 animate-pulse rounded-full'></div>
+            <div className='bg-cfg-white h-2 w-2 animate-pulse rounded-full'></div>
           </div>
         ) : !isAuthenticated ? (
           <button
