@@ -1,5 +1,5 @@
-import PageLayout from '@/components/layouts/PageLayout'
 import Head from 'next/head'
+import PageLayout from '@/components/layouts/PageLayout'
 
 const meta = {
   title: 'Bear Watch | Terms of Service',
@@ -44,7 +44,10 @@ const index = () => {
           <li>
             <h2>Emergency Services</h2>
             <p>
-              The <span className='font-semibold italic'>Get Help feature</span>{' '}
+              The{' '}
+              <span className='text-color font-semibold italic'>
+                Get Help feature
+              </span>{' '}
               is intended for emergencies. You agree to use it responsibly.
             </p>
           </li>

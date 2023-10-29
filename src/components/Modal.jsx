@@ -42,19 +42,19 @@ export default Modal
 const ModalMenu = ({ children }) => {
   return (
     <div
-      className='mx-4 flex w-full flex-col
-        items-center justify-center
-        rounded-lg
-        border 
-        border-slate-900
-        bg-stone-100/50
-        p-4
-        text-slate-900
-        opacity-90
-        shadow-sm shadow-slate-900
-        dark:border-stone-100 dark:bg-slate-900/50
-        dark:text-white dark:shadow-sm
-        dark:shadow-stone-100
+      className='border-cfg-black text-cfg-black shadow-cfg-black dark:bg-cfg-black/50
+        bg-cfg-white/50 dark:border-cfg-white
+        dark:shadow-cfg-white
+        mx-4 
+        flex
+        w-full
+        flex-col
+        items-center
+        justify-center
+        rounded-lg border
+        p-4 opacity-90
+        shadow-sm dark:text-white
+        dark:shadow-sm
         sm:mx-12 md:mx-24 2xl:hidden'
       onClick={(e) => e.stopPropagation()}
     >

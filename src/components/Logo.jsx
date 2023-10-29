@@ -2,29 +2,42 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
 
-export const LogoLink = ({ className = '' }) => {
+export const LogoLink = ({ className = '', smallLogo = false }) => {
   return (
     <Link href='/' target='_self'>
-      <Logo className={className} />
+      <Logo className={className} smallLogo={smallLogo} />
     </Link>
   )
 }
 
-export const Logo = ({ className = '' }) => {
+export const Logo = ({ className = '', smallLogo = false }) => {
   return (
     <span
       className={twMerge(
-        'inline-flex h-11 w-11 items-center justify-center rounded-full bg-stone-100 ring-2 ring-slate-900',
+        'inline-flex h-11 w-11 items-center justify-center rounded-full',
         className
       )}
     >
-      <Image
-        src='/bear-logo.png'
-        alt='Bear Logo'
-        width={50}
-        height={50}
-        priority
-      />
+      <span className={smallLogo ? 'hidden dark:block' : 'dark:hidden'}>
+        <Image
+          src='/logo-black.png'
+          alt='Bear Logo Black'
+          width={50}
+          height={50}
+          priority
+          className='px-1'
+        />
+      </span>
+      <span className={smallLogo ? 'dark:hidden' : 'hidden dark:block'}>
+        <Image
+          src='/logo-white.png'
+          alt='Bear Logo White'
+          width={50}
+          height={50}
+          priority
+          className='px-1'
+        />
+      </span>
     </span>
   )
 }

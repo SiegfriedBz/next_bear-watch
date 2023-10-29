@@ -13,8 +13,10 @@ export const useAppContext = () => {
 export const AppContextProvider = ({ children }) => {
   // user fetched from DB (not just from session)
   const [user, setUser] = useState(null)
+  // bearMarkers fetched from DB
+  const [bearMarkers, setBearMarkers] = useState(null)
 
-  // help button state
+  // help button
   const [helpIsOpened, setHelpIsOpened] = useState(false)
 
   // Toast notifications helper
@@ -39,7 +41,15 @@ export const AppContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ user, setUser, helpIsOpened, setHelpIsOpened, handleToast }}
+      value={{
+        user,
+        setUser,
+        bearMarkers,
+        setBearMarkers,
+        helpIsOpened,
+        setHelpIsOpened,
+        handleToast,
+      }}
     >
       {children}
     </AppContext.Provider>

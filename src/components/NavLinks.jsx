@@ -4,12 +4,12 @@ import { useSession, signIn } from 'next-auth/react'
 const NAV_LINKS = [
   {
     id: 1,
-    href: '/profile',
-    text: 'Your Profile',
+    href: '/my-profile',
+    text: 'My Profile',
   },
   {
     id: 2,
-    href: '/#home-map',
+    href: '/#map',
     text: 'Explore Bear Sightings',
   },
 
@@ -34,9 +34,9 @@ const NavLinks = ({ className = '', closeModal }) => {
   const { status } = useSession()
 
   // enforce sign-in to access profile page
-  const checkIfAuthenticated = () => {
+  const signInIfUnauthenticated = () => {
     return status === 'unauthenticated'
-      ? signIn('google', { callbackUrl: '/profile' })
+      ? signIn('google', { callbackUrl: '/my-profile' })
       : closeModal()
   }
 
@@ -48,7 +48,9 @@ const NavLinks = ({ className = '', closeModal }) => {
             key={link.id}
             href={link.href}
             onClick={() => {
-              link.href === '/profile' ? checkIfAuthenticated() : closeModal()
+              link.href === '/my-profile'
+                ? signInIfUnauthenticated()
+                : closeModal()
             }}
           >
             {link.text}

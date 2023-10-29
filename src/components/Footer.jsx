@@ -10,7 +10,8 @@ const Footer = () => {
       <div id='footer-top' className='flex items-center justify-between'>
         {/* brand */}
         <div id='footer-brand' className='flex items-center space-x-2'>
-          <LogoLink className='h-9 w-9' />
+          <LogoLink className='dark:ring-cfg-white ring-cfg-black h-8 w-8 ring-1' />
+
           <Link id='brand-link' href='/' target='_self'>
             <span className='whitespace-nowrap text-lg font-bold italic'>
               Bear Watch
@@ -30,7 +31,7 @@ const Footer = () => {
 
       {/* credits */}
       <div id='footer-credits'>
-        <h2 className='mt-5 text-center text-sm text-slate-900 dark:text-stone-100'>
+        <h2 className='text-cfg-black dark:text-cfg-white mt-5 text-center text-sm'>
           <span>
             &copy;{new Date().getFullYear()} Bear Watch All Rights Reserved.
           </span>
@@ -42,7 +43,7 @@ const Footer = () => {
             <FontAwesomeIcon
               icon={faHeartPulse}
               className='w-4
-              text-red-500'
+              text-warning dark:text-warning-light'
             />
           </span>
           by

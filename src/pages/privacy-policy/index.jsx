@@ -1,5 +1,5 @@
-import PageLayout from '@/components/layouts/PageLayout'
 import Head from 'next/head'
+import PageLayout from '@/components/layouts/PageLayout'
 
 const meta = {
   title: 'Bear Watch | Privacy Policy',
@@ -41,7 +41,7 @@ const index = () => {
                 <h3>Location Data</h3>
                 <p>
                   If you choose to use the
-                  <span className='font-semibold italic'>
+                  <span className='text-color font-semibold italic'>
                     {' '}
                     Get Help feature
                   </span>
@@ -66,8 +66,8 @@ const index = () => {
                 <p>
                   We use your email address for authentication and
                   communication. Your blood group and friend&apos;s contact
-                  number are stored for the
-                  <span className='font-semibold italic'>
+                  number are stored for the{' '}
+                  <span className='text-color font-semibold italic'>
                     Get Help feature
                   </span>{' '}
                   to send emergency messages.
