@@ -31,7 +31,7 @@ body {
   }
 
   hr {
-    @apply bg-cfg-black dark:bg-cfg-white h-[0.075rem] w-full dark:h-[0.015rem];
+    @apply dark:bg-cfg-white h-[0.1rem] w-full bg-primary dark:h-[0.015rem];
   }
 
   input,
@@ -88,7 +88,7 @@ body {
       dark:text-cfg-white
       z-[500]
       mt-[var(--hero-mt)]
-      w-full pt-6 text-center drop-shadow-md;
+      w-full pt-6 text-center;
     }
   }
 }

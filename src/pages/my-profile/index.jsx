@@ -55,17 +55,19 @@ const Profile = (props) => {
       </Head>
 
       <PageLayout>
-        <div className='layout-gradient my-4 flex flex-col space-y-4'>
+        <div className='layout-gradient align-center my-4 flex flex-col space-y-4'>
           <h2 className='text-center text-3xl'>My Profile</h2>
 
-          <Form
-            friendWhatsappNumber={friendWhatsappNumber}
-            setFriendWhatsappNumber={setFriendWhatsappNumber}
-            bloodGroup={bloodGroup}
-            setBloodGroup={setBloodGroup}
-            setUser={setUser}
-            handleToast={handleToast}
-          />
+          <div className='px-2'>
+            <Form
+              friendWhatsappNumber={friendWhatsappNumber}
+              setFriendWhatsappNumber={setFriendWhatsappNumber}
+              bloodGroup={bloodGroup}
+              setBloodGroup={setBloodGroup}
+              setUser={setUser}
+              handleToast={handleToast}
+            />
+          </div>
 
           <div id='my-profile-map scroll-mt-24'>
             <MapFeatures
@@ -122,7 +124,7 @@ const Form = ({
   }
 
   return (
-    <div className='border-cfg-black/10 dark:border-cfg-white/30 my-4 flex w-full flex-col items-center justify-center rounded-xl border-2 px-8 py-8 shadow-lg dark:border'>
+    <div className='dark:border-cfg-white dark:shadow-cfg-white my-4 flex w-full flex-col items-center justify-center rounded-xl border-2 border-primary px-4 py-8 shadow-sm shadow-primary dark:border'>
       <form onSubmit={handleSubmit}>
         <div className='flex flex-col items-center justify-center space-y-8 '>
           <div className='flex flex-col items-center justify-center'>
@@ -215,7 +217,7 @@ const MapFeatures = ({
       <div className='px-2'>
         <h2 className='text-center font-bold'>Bear Sighting Map</h2>
 
-        <p>Tap the switches to enable the map features.</p>
+        <p>Toggle the switches to enable the map features.</p>
         <ul className='my-4 ms-4 list-disc space-y-2'>
           <li>
             <p>
@@ -237,14 +239,13 @@ const MapFeatures = ({
             </p>
             <ul className='ms-4 list-disc'>
               <li>
-                <p>
+                <p className='text-left'>
                   <span className='text-color font-semibold italic'>
                     click on the map
                   </span>{' '}
                   <span> to </span>
                   <span className='text-color font-semibold italic'>
-                    add a new{' '}
-                    <span className='whitespace-nowrap'>bear sight</span>
+                    add a new bear sight
                   </span>
                   .
                 </p>
