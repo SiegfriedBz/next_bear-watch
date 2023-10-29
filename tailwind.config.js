@@ -9,16 +9,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'cfg-white': '#f5f5f4', // stone-100
+        'cfg-black': '#0f172a', // slate-900
         primary: {
-          DEFAULT: '#3B82F6', // blue-500
-          dark: '#2563EB', // blue-600
-          light: '#93C5FD', // blue-300
+          DEFAULT: '#34d399', // emerald-400
+          dark: '#10b981', // emerald-500
+          light: '#6ee7b7', // emerald-300
         },
-        success: '#94D177',
+        secondary: {
+          DEFAULT: '#f59e0b', // amber-500
+          light: '#fcd34d', // amber-300
+        },
         warning: {
           DEFAULT: '#EF4444', // red-500
-          dark: '#DC2626', // red-600
-          light: '#fecaca', // red-200
+          light: '#F87171', // red-400
         },
       },
     },
