@@ -16,7 +16,7 @@ const ButtonScrollToTop = ({
     <FontAwesomeIcon
       icon={faCircleArrowUp}
       onClick={scrollToTop}
-      className={`${bottom} text-success-light hover:text-success-light absolute right-0 cursor-pointer text-2xl transition-all`}
+      className={`${bottom} absolute right-0 cursor-pointer text-2xl text-primary-light transition-all hover:text-primary-light`}
     />
   )
 }
