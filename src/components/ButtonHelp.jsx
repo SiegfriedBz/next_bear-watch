@@ -26,7 +26,7 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
     if (!friendWhatsapp) {
       setHelpIsOpened(false)
       setHelpLinkHref(null)
-      router.push('/profile')
+      router.push('/my-profile')
       handleToast({
         type: 'info',
         message:
@@ -64,7 +64,7 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
   return (
     <>
       {helpLinkHref == null ? (
-        <div className='flex h-full w-full flex-col items-center justify-center rounded-full bg-stone-100 p-2 '>
+        <div className='bg-cfg-white flex h-full w-full flex-col items-center justify-center rounded-full p-2 '>
           <button
             onClick={handleGetHelp}
             className='space-nowrap text-lg text-warning'
@@ -83,16 +83,16 @@ const ButtonHelp = ({ setHelpIsOpened }) => {
           </button>
         </div>
       ) : (
-        <div className='flex h-full w-full flex-col items-center justify-center rounded-full bg-warning p-2 ring-2 ring-stone-100'>
+        <div className='ring-cfg-white flex h-full w-full flex-col items-center justify-center rounded-full bg-warning p-2 ring-2'>
           <Link
             href={helpLinkHref}
             target={'_blank'}
-            className='text-lg text-stone-100'
+            className='text-cfg-white text-lg'
           >
             Confirm
           </Link>
           <button
-            className='text-sm text-stone-100/50'
+            className='text-cfg-white/50 text-sm'
             onClick={(e) => {
               e.stopPropagation()
               setHelpLinkHref(null)
