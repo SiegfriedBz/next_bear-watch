@@ -24,10 +24,11 @@ const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
         htmlFor={`switch-${switchId}}`}
         className={`
               before:text-cfg-white
+              dark:after:text-cfg-white
               relative
-              h-full
-              w-[3.5rem] rounded-lg border
+              h-full w-[3.5rem] rounded-lg
 
+              border
               border-primary
               before:absolute
               before:top-1/2
@@ -38,17 +39,20 @@ const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
               before:items-center
               before:justify-center
               before:rounded-lg
-              before:border
-            before:border-primary
+            before:border
+              before:border-primary
               before:text-xl
               before:font-bold
               before:transition-all
               before:duration-700
               after:absolute
+
               after:top-1/2
 
               after:w-[max-content]  
               after:-translate-y-1/2
+              after:font-semibold
+              after:text-primary
               dark:border-primary-light 
               dark:before:border-primary-light 
               ${labelClass}
