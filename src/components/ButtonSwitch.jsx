@@ -5,8 +5,8 @@ const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
   const switchId = useId()
 
   const labelClass =
-    label === 'Add'
-      ? 'after:content-["Add"] after:translate-x-1/4 after:-right-[1.65rem]'
+    label === 'Edit'
+      ? 'after:content-["Edit"] after:translate-x-1/4 after:-right-[1.65rem]'
       : label === 'Filter'
       ? 'after:content-["Filter"] after:translate-x-1/2 after:-right-[1.35rem]'
       : label === 'Center'
@@ -23,11 +23,12 @@ const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
       <label
         htmlFor={`switch-${switchId}}`}
         className={`
+              before:text-cfg-white
               relative
               h-full
-              w-[3.5rem]
-              rounded-lg border border-success
+              w-[3.5rem] rounded-lg border
 
+              border-primary
               before:absolute
               before:top-1/2
               before:flex
@@ -38,22 +39,23 @@ const ButtonSwitch = ({ label, isChecked, onChange, className = '' }) => {
               before:justify-center
               before:rounded-lg
               before:border
-            before:border-success
+            before:border-primary
               before:text-xl
               before:font-bold
-            before:text-stone-100
-              before:transition
+              before:transition-all
               before:duration-700
-
-              after:absolute  
+              after:absolute
               after:top-1/2
-              after:w-[max-content] 
-              after:-translate-y-1/2 
+
+              after:w-[max-content]  
+              after:-translate-y-1/2
+              dark:border-primary-light 
+              dark:before:border-primary-light 
               ${labelClass}
               
               ${
                 isChecked
-                  ? 'before:left-auto before:right-0 before:border-r-0 before:bg-success before:content-["✓"]'
+                  ? 'before:left-auto before:right-0 before:border-r-0 before:bg-primary before:content-["✓"] dark:before:bg-primary-light'
                   : 'before:left-0 before:right-auto before:border-l-0 before:bg-gray-200 before:content-[""]'
               }`}
       >
